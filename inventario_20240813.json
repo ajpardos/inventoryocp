@@ -96,7 +96,7 @@
     "pod_liveness_probe": {},
     "pod_image": "image-registry.openshift-image-registry.svc:5000/test-ajpardos/java-springboot-basic:latest",
     "pod_cpu_usage": "0m",
-    "pod_memory_usage": "199Mi"
+    "pod_memory_usage": "198Mi"
   },
   {
     "namespace": "test-ajpardos",
@@ -251,5 +251,9 @@
   {
     "namespace": "test-ajpardos",
     "configmap_name": "nodejs-basic-1-sys-config"
+  },
+  {
+    "namespace": "test-ajpardos",
+    "node_selector": "crc"
   }
 ]
