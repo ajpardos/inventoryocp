@@ -137,16 +137,18 @@ def get_secrets(namespace):
     return secret_info
 
 def get_configmaps(namespace):
-    """Obtiene los configmaps del namespace."""
+    """Obtiene los configmaps del namespace, omitiendo los que comienzan con openshift o kube-."""
     configmaps = run_command(f"kubectl get configmap -n {namespace} -o json")
     if configmaps is None:
         return []
     configmaps_json = json.loads(configmaps)
     configmap_info = []
     for configmap in configmaps_json['items']:
-        configmap_info.append({
-            'name': configmap['metadata']['name'],
-        })
+        configmap_name = configmap['metadata']['name']
+        if not (configmap_name.startswith('openshift') or configmap_name.startswith('kube-')):
+            configmap_info.append({
+                'name': configmap_name,
+            })
     return configmap_info
 
 def get_pod_metrics(namespace):

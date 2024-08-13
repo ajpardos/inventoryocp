@@ -72,22 +72,6 @@
     "configmap_name": "hellogo-1-sys-config"
   },
   {
-    "namespace": "hello-world",
-    "configmap_name": "kube-root-ca.crt"
-  },
-  {
-    "namespace": "hello-world",
-    "configmap_name": "openshift-service-ca.crt"
-  },
-  {
-    "namespace": "openshift",
-    "configmap_name": "kube-root-ca.crt"
-  },
-  {
-    "namespace": "openshift",
-    "configmap_name": "openshift-service-ca.crt"
-  },
-  {
     "namespace": "test-ajpardos",
     "deployment_name": "java-springboot-basic",
     "node_name": "crc",
@@ -258,10 +242,6 @@
   },
   {
     "namespace": "test-ajpardos",
-    "configmap_name": "kube-root-ca.crt"
-  },
-  {
-    "namespace": "test-ajpardos",
     "configmap_name": "nodejs-basic-1-ca"
   },
   {
@@ -271,9 +251,5 @@
   {
     "namespace": "test-ajpardos",
     "configmap_name": "nodejs-basic-1-sys-config"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "configmap_name": "openshift-service-ca.crt"
   }
 ]
