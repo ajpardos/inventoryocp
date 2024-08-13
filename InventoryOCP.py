@@ -62,6 +62,15 @@ def get_pod_info(namespace):
         })
     return pod_info
 
+def get_node_selector(namespace):
+    """Obtiene el node selector del namespace."""
+    namespace_info = run_command(f"kubectl get namespace {namespace} -o json")
+    if namespace_info is None:
+        return {}
+    namespace_json = json.loads(namespace_info)
+    node_selector = namespace_json['metadata'].get('annotations', {}).get('openshift.io/node-selector', 'N/A')
+    return node_selector
+
 def get_resource_quotas(namespace):
     """Obtiene las cuotas de recursos del namespace."""
     quotas = run_command(f"kubectl get resourcequota -n {namespace} -o json")
@@ -77,6 +86,25 @@ def get_resource_quotas(namespace):
             'limits': hard_limits
         })
     return quota_info
+
+def get_persistent_volumes():
+    """Obtiene información de los volúmenes persistentes."""
+    pvs = run_command("kubectl get pv -o json")
+    if pvs is None:
+        return []
+    pvs_json = json.loads(pvs)
+    pv_info = []
+    for pv in pvs_json['items']:
+        claim_ref = pv['spec'].get('claimRef')
+        namespace = claim_ref.get('namespace') if claim_ref else None
+        pv_info.append({
+            'name': pv['metadata']['name'],
+            'namespace': namespace,
+            'capacity': pv['spec']['capacity']['storage'],
+            'access_modes': pv['spec']['accessModes'],
+            'reclaim_policy': pv['spec']['persistentVolumeReclaimPolicy']
+        })
+    return pv_info
 
 def get_persistent_volume_claims(namespace):
     """Obtiene las reclamaciones de volúmenes persistentes del namespace."""
@@ -139,15 +167,99 @@ def get_pod_metrics(namespace):
 
     return pod_metrics
 
+def get_deployments_info(namespace):
+    """Obtiene información de los despliegues en un namespace."""
+    deployments = run_command(f"kubectl get deployments -n {namespace} -o json")
+    if deployments is None:
+        return []
+    deployment_info = []
+
+    deployments_json = json.loads(deployments)
+    for deployment in deployments_json['items']:
+        deployment_name = deployment['metadata']['name']
+        replicas = deployment['spec']['replicas']
+        labels = deployment['metadata'].get('labels', {})
+        deployment_info.append({
+            'name': deployment_name,
+            'replicas': replicas,
+            'labels': labels
+        })
+    return deployment_info
+
+def get_services_info(namespace):
+    """Obtiene información de los servicios en un namespace."""
+    services = run_command(f"kubectl get services -n {namespace} -o json")
+    if services is None:
+        return []
+    service_info = []
+
+    services_json = json.loads(services)
+    for service in services_json['items']:
+        service_name = service['metadata']['name']
+        service_type = service['spec']['type']
+        ports = service['spec'].get('ports', [])
+        service_info.append({
+            'name': service_name,
+            'type': service_type,
+            'ports': ports
+        })
+    return service_info
+
+def get_routes_info(namespace):
+    """Obtiene información de las rutas en un namespace."""
+    routes = run_command(f"kubectl get routes -n {namespace} -o json")
+    if routes is None:
+        return []
+    route_info = []
+
+    routes_json = json.loads(routes)
+    for route in routes_json['items']:
+        route_name = route['metadata']['name']
+        host = route['spec']['host']
+        route_info.append({
+            'name': route_name,
+            'host': host
+        })
+    return route_info
+
+def get_hpa_info(namespace):
+    """Obtiene información de los HPA en un namespace."""
+    hpas = run_command(f"kubectl get hpa -n {namespace} -o json")
+    if hpas is None:
+        return []
+    hpa_info = []
+
+    hpas_json = json.loads(hpas)
+    for hpa in hpas_json['items']:
+        hpa_name = hpa['metadata']['name']
+        min_replicas = hpa['spec'].get('minReplicas', 1)
+        max_replicas = hpa['spec']['maxReplicas']
+        current_cpu_utilization = hpa['status'].get('currentCPUUtilizationPercentage', 'N/A')
+        hpa_info.append({
+            'name': hpa_name,
+            'min_replicas': min_replicas,
+            'max_replicas': max_replicas,
+            'current_cpu_utilization': current_cpu_utilization
+        })
+    return hpa_info
+
 def generate_inventory():
     """Genera un inventario de los microservicios y lo guarda en archivos CSV y JSON."""
     inventory = []
+    
+    pv_info = get_persistent_volumes()
 
     namespaces = get_non_openshift_namespaces()
     for namespace in namespaces:
         print(f"Processing namespace: {namespace}")
         pod_info = get_pod_info(namespace)
         pod_metrics = get_pod_metrics(namespace)
+        deployments_info = get_deployments_info(namespace)
+        services_info = get_services_info(namespace)
+        routes_info = get_routes_info(namespace)
+        hpa_info = get_hpa_info(namespace)
+        node_selector = get_node_selector(namespace)
+        quotas_info = get_resource_quotas(namespace)
         pvc_info = get_persistent_volume_claims(namespace)
         secret_info = get_secrets(namespace)
         configmap_info = get_configmaps(namespace)
@@ -160,17 +272,95 @@ def generate_inventory():
                 'namespace': namespace,
                 'pod_name': pod_name,
                 'node_name': node_name,
-                'resources': pod['resources'],
-                'readiness_probe': pod['readiness_probe'],
-                'liveness_probe': pod['liveness_probe'],
-                'image': pod['image'],
+                'pod_resources': pod['resources'],
+                'pod_readiness_probe': pod['readiness_probe'],
+                'pod_liveness_probe': pod['liveness_probe'],
+                'pod_image': pod['image'],
                 'pod_cpu_usage': metrics.get('cpu', 'N/A'),
-                'pod_memory_usage': metrics.get('memory', 'N/A')
+                'pod_memory_usage': metrics.get('memory', 'N/A'),
+                'node_selector': node_selector
             })
 
-        inventory.extend(pvc_info)
-        inventory.extend(secret_info)
-        inventory.extend(configmap_info)
+        for deployment in deployments_info:
+            inventory.append({
+                'namespace': namespace,
+                'deployment_name': deployment['name'],
+                'deployment_replicas': deployment['replicas'],
+                'deployment_labels': deployment['labels'],
+                'node_selector': node_selector
+            })
+
+        for service in services_info:
+            inventory.append({
+                'namespace': namespace,
+                'service_name': service['name'],
+                'service_type': service['type'],
+                'service_ports': service['ports'],
+                'node_selector': node_selector
+            })
+
+        for route in routes_info:
+            inventory.append({
+                'namespace': namespace,
+                'route_name': route['name'],
+                'route_host': route['host'],
+                'node_selector': node_selector
+            })
+
+        for hpa in hpa_info:
+            inventory.append({
+                'namespace': namespace,
+                'hpa_name': hpa['name'],
+                'hpa_min_replicas': hpa['min_replicas'],
+                'hpa_max_replicas': hpa['max_replicas'],
+                'hpa_current_cpu_utilization': hpa['current_cpu_utilization'],
+                'node_selector': node_selector
+            })
+
+        for quota in quotas_info:
+            inventory.append({
+                'namespace': namespace,
+                'quota_name': quota['name'],
+                'quota_limits': quota['limits'],
+                'node_selector': node_selector
+            })
+
+        for pv in pv_info:
+            if pv['namespace'] == namespace:
+                inventory.append({
+                    'namespace': namespace,
+                    'pv_name': pv['name'],
+                    'pv_capacity': pv['capacity'],
+                    'pv_access_modes': pv['access_modes'],
+                    'pv_reclaim_policy': pv['reclaim_policy'],
+                    'node_selector': node_selector
+                })
+
+        for pvc in pvc_info:
+            inventory.append({
+                'namespace': namespace,
+                'pvc_name': pvc['name'],
+                'pvc_volume_name': pvc['volume_name'],
+                'pvc_access_modes': pvc['access_modes'],
+                'pvc_capacity': pvc['capacity'],
+                'node_selector': node_selector
+            })
+
+        for secret in secret_info:
+            inventory.append({
+                'namespace': namespace,
+                'secret_name': secret['name'],
+                'secret_type': secret['type'],
+                'node_selector': node_selector
+            })
+
+        for configmap in configmap_info:
+            inventory.append({
+                'namespace': namespace,
+                'configmap_name': configmap['name'],
+                'configmap_data_keys': configmap['data_keys'],
+                'node_selector': node_selector
+            })
 
     # Obtener la fecha actual para usarla en el nombre de los archivos
     date_str = datetime.datetime.now().strftime("%Y%m%d")
@@ -178,9 +368,13 @@ def generate_inventory():
     # Guardar el inventario en un archivo CSV
     with open(f'inventario_{date_str}.csv', 'w', newline='') as csvfile:
         fieldnames = [
-            'namespace', 'pod_name', 'node_name', 'resources', 'readiness_probe', 'liveness_probe',
-            'image', 'pod_cpu_usage', 'pod_memory_usage', 'name', 'volume_name', 'access_modes',
-            'capacity', 'type', 'data_keys'
+            'namespace', 'pod_name', 'node_name', 'pod_resources', 'pod_readiness_probe', 'pod_liveness_probe',
+            'pod_image', 'pod_cpu_usage', 'pod_memory_usage', 'deployment_name', 'deployment_replicas', 'deployment_labels',
+            'service_name', 'service_type', 'service_ports', 'route_name', 'route_host',
+            'hpa_name', 'hpa_min_replicas', 'hpa_max_replicas', 'hpa_current_cpu_utilization',
+            'quota_name', 'quota_limits', 'pv_name', 'pv_capacity', 'pv_access_modes', 'pv_reclaim_policy',
+            'pvc_name', 'pvc_volume_name', 'pvc_access_modes', 'pvc_capacity',
+            'secret_name', 'secret_type', 'configmap_name', 'configmap_data_keys', 'node_selector'
         ]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
