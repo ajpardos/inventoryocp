@@ -46,19 +46,18 @@ def get_pod_info(namespace):
 
     pods_json = json.loads(pods)
     for pod in pods_json['items']:
-        pod_name = pod['metadata']['name']
         node_name = pod['spec'].get('nodeName', 'N/A')
         resources = pod['spec']['containers'][0].get('resources', {})
         readiness_probe = pod['spec']['containers'][0].get('readinessProbe', {})
         liveness_probe = pod['spec']['containers'][0].get('livenessProbe', {})
         image = pod['spec']['containers'][0]['image']
         pod_info.append({
-            'name': pod_name,
             'node_name': node_name,
             'resources': resources,
             'readiness_probe': readiness_probe,
             'liveness_probe': liveness_probe,
-            'image': image
+            'image': image,
+            'pod_name': pod['metadata']['name']
         })
     return pod_info
 
@@ -179,7 +178,7 @@ def get_deployments_info(namespace):
         replicas = deployment['spec']['replicas']
         labels = deployment['metadata'].get('labels', {})
         deployment_info.append({
-            'name': deployment_name,
+            'deployment_name': deployment_name,
             'replicas': replicas,
             'labels': labels
         })
@@ -263,26 +262,28 @@ def generate_inventory():
         secret_info = get_secrets(namespace)
         configmap_info = get_configmaps(namespace)
         
-        for pod in pod_info:
-            pod_name = pod['name']
-            node_name = pod['node_name']
-            metrics = pod_metrics.get(pod_name, {})
-            inventory.append({
-                'namespace': namespace,
-                'pod_name': pod_name,
-                'node_name': node_name,
-                'pod_resources': pod['resources'],
-                'pod_readiness_probe': pod['readiness_probe'],
-                'pod_liveness_probe': pod['liveness_probe'],
-                'pod_image': pod['image'],
-                'pod_cpu_usage': metrics.get('cpu', 'N/A'),
-                'pod_memory_usage': metrics.get('memory', 'N/A')
-            })
-
         for deployment in deployments_info:
+            deployment_name = deployment['deployment_name']
+            relevant_pods = [pod for pod in pod_info if deployment_name in pod['pod_name']]
+            
+            for pod in relevant_pods:
+                node_name = pod['node_name']
+                metrics = pod_metrics.get(pod['pod_name'], {})
+                inventory.append({
+                    'namespace': namespace,
+                    'deployment_name': deployment_name,
+                    'node_name': node_name,
+                    'pod_resources': pod['resources'],
+                    'pod_readiness_probe': pod['readiness_probe'],
+                    'pod_liveness_probe': pod['liveness_probe'],
+                    'pod_image': pod['image'],
+                    'pod_cpu_usage': metrics.get('cpu', 'N/A'),
+                    'pod_memory_usage': metrics.get('memory', 'N/A')
+                })
+
             inventory.append({
                 'namespace': namespace,
-                'deployment_name': deployment['name'],
+                'deployment_name': deployment_name,
                 'deployment_replicas': deployment['replicas'],
                 'deployment_labels': deployment['labels']
             })
@@ -363,7 +364,7 @@ def generate_inventory():
     # Guardar el inventario en un archivo CSV
     with open(f'inventario_{date_str}.csv', 'w', newline='') as csvfile:
         fieldnames = [
-            'namespace', 'pod_name', 'node_name', 'pod_resources', 'pod_readiness_probe', 'pod_liveness_probe',
+            'namespace', 'node_name', 'pod_resources', 'pod_readiness_probe', 'pod_liveness_probe',
             'pod_image', 'pod_cpu_usage', 'pod_memory_usage', 'deployment_name', 'deployment_replicas', 'deployment_labels',
             'service_name', 'service_type', 'service_ports', 'route_name', 'route_host',
             'hpa_name', 'hpa_min_replicas', 'hpa_max_replicas', 'hpa_current_cpu_utilization',

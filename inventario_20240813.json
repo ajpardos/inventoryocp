@@ -1,7 +1,7 @@
 [
   {
     "namespace": "hello-world",
-    "pod_name": "hellogo-1-build",
+    "deployment_name": "hellogo",
     "node_name": "crc",
     "pod_resources": {},
     "pod_readiness_probe": {},
@@ -12,7 +12,7 @@
   },
   {
     "namespace": "hello-world",
-    "pod_name": "hellogo-68b9b67b9b-fh74x",
+    "deployment_name": "hellogo",
     "node_name": "crc",
     "pod_resources": {},
     "pod_readiness_probe": {},
@@ -89,7 +89,7 @@
   },
   {
     "namespace": "test-ajpardos",
-    "pod_name": "java-springboot-basic-1-build",
+    "deployment_name": "java-springboot-basic",
     "node_name": "crc",
     "pod_resources": {},
     "pod_readiness_probe": {},
@@ -100,7 +100,7 @@
   },
   {
     "namespace": "test-ajpardos",
-    "pod_name": "java-springboot-basic-85df8f5bc9-fpb2v",
+    "deployment_name": "java-springboot-basic",
     "node_name": "crc",
     "pod_resources": {
       "requests": {
@@ -112,34 +112,7 @@
     "pod_liveness_probe": {},
     "pod_image": "image-registry.openshift-image-registry.svc:5000/test-ajpardos/java-springboot-basic:latest",
     "pod_cpu_usage": "0m",
-    "pod_memory_usage": "200Mi"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "pod_name": "nodejs-basic-1-build",
-    "node_name": "crc",
-    "pod_resources": {},
-    "pod_readiness_probe": {},
-    "pod_liveness_probe": {},
-    "pod_image": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46",
-    "pod_cpu_usage": "N/A",
-    "pod_memory_usage": "N/A"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "pod_name": "nodejs-basic-6c866577f6-zf5zk",
-    "node_name": "crc",
-    "pod_resources": {
-      "requests": {
-        "cpu": "10m",
-        "memory": "50Mi"
-      }
-    },
-    "pod_readiness_probe": {},
-    "pod_liveness_probe": {},
-    "pod_image": "image-registry.openshift-image-registry.svc:5000/test-ajpardos/nodejs-basic:latest",
-    "pod_cpu_usage": "3m",
-    "pod_memory_usage": "63Mi"
+    "pod_memory_usage": "199Mi"
   },
   {
     "namespace": "test-ajpardos",
@@ -153,6 +126,33 @@
       "app.kubernetes.io/part-of": "sample-app",
       "app.openshift.io/runtime": "spring-boot"
     }
+  },
+  {
+    "namespace": "test-ajpardos",
+    "deployment_name": "nodejs-basic",
+    "node_name": "crc",
+    "pod_resources": {},
+    "pod_readiness_probe": {},
+    "pod_liveness_probe": {},
+    "pod_image": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46",
+    "pod_cpu_usage": "N/A",
+    "pod_memory_usage": "N/A"
+  },
+  {
+    "namespace": "test-ajpardos",
+    "deployment_name": "nodejs-basic",
+    "node_name": "crc",
+    "pod_resources": {
+      "requests": {
+        "cpu": "10m",
+        "memory": "50Mi"
+      }
+    },
+    "pod_readiness_probe": {},
+    "pod_liveness_probe": {},
+    "pod_image": "image-registry.openshift-image-registry.svc:5000/test-ajpardos/nodejs-basic:latest",
+    "pod_cpu_usage": "3m",
+    "pod_memory_usage": "63Mi"
   },
   {
     "namespace": "test-ajpardos",
