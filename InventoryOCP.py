@@ -144,10 +144,8 @@ def get_configmaps(namespace):
     configmaps_json = json.loads(configmaps)
     configmap_info = []
     for configmap in configmaps_json['items']:
-        data_keys = list(configmap.get('data', {}).keys())
         configmap_info.append({
             'name': configmap['metadata']['name'],
-            'data_keys': data_keys,
         })
     return configmap_info
 
@@ -358,7 +356,6 @@ def generate_inventory():
             inventory.append({
                 'namespace': namespace,
                 'configmap_name': configmap['name'],
-                'configmap_data_keys': configmap['data_keys'],
                 'node_selector': node_selector
             })
 
@@ -374,7 +371,7 @@ def generate_inventory():
             'hpa_name', 'hpa_min_replicas', 'hpa_max_replicas', 'hpa_current_cpu_utilization',
             'quota_name', 'quota_limits', 'pv_name', 'pv_capacity', 'pv_access_modes', 'pv_reclaim_policy',
             'pvc_name', 'pvc_volume_name', 'pvc_access_modes', 'pvc_capacity',
-            'secret_name', 'secret_type', 'configmap_name', 'configmap_data_keys', 'node_selector'
+            'secret_name', 'secret_type', 'configmap_name', 'node_selector'
         ]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 

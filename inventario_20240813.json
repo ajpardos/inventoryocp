@@ -104,40 +104,26 @@
   {
     "namespace": "hello-world",
     "configmap_name": "hellogo-1-ca",
-    "configmap_data_keys": [
-      "default-route-openshift-image-registry.apps-crc.testing",
-      "service-ca.crt"
-    ],
     "node_selector": "N/A"
   },
   {
     "namespace": "hello-world",
     "configmap_name": "hellogo-1-global-ca",
-    "configmap_data_keys": [
-      "ca-bundle.crt"
-    ],
     "node_selector": "N/A"
   },
   {
     "namespace": "hello-world",
     "configmap_name": "hellogo-1-sys-config",
-    "configmap_data_keys": [],
     "node_selector": "N/A"
   },
   {
     "namespace": "hello-world",
     "configmap_name": "kube-root-ca.crt",
-    "configmap_data_keys": [
-      "ca.crt"
-    ],
     "node_selector": "N/A"
   },
   {
     "namespace": "hello-world",
     "configmap_name": "openshift-service-ca.crt",
-    "configmap_data_keys": [
-      "service-ca.crt"
-    ],
     "node_selector": "N/A"
   },
   {
@@ -179,17 +165,11 @@
   {
     "namespace": "openshift",
     "configmap_name": "kube-root-ca.crt",
-    "configmap_data_keys": [
-      "ca.crt"
-    ],
     "node_selector": "N/A"
   },
   {
     "namespace": "openshift",
     "configmap_name": "openshift-service-ca.crt",
-    "configmap_data_keys": [
-      "service-ca.crt"
-    ],
     "node_selector": "N/A"
   },
   {
@@ -405,63 +385,41 @@
   {
     "namespace": "test-ajpardos",
     "configmap_name": "java-springboot-basic-1-ca",
-    "configmap_data_keys": [
-      "default-route-openshift-image-registry.apps-crc.testing",
-      "service-ca.crt"
-    ],
     "node_selector": "N/A"
   },
   {
     "namespace": "test-ajpardos",
     "configmap_name": "java-springboot-basic-1-global-ca",
-    "configmap_data_keys": [
-      "ca-bundle.crt"
-    ],
     "node_selector": "N/A"
   },
   {
     "namespace": "test-ajpardos",
     "configmap_name": "java-springboot-basic-1-sys-config",
-    "configmap_data_keys": [],
     "node_selector": "N/A"
   },
   {
     "namespace": "test-ajpardos",
     "configmap_name": "kube-root-ca.crt",
-    "configmap_data_keys": [
-      "ca.crt"
-    ],
     "node_selector": "N/A"
   },
   {
     "namespace": "test-ajpardos",
     "configmap_name": "nodejs-basic-1-ca",
-    "configmap_data_keys": [
-      "default-route-openshift-image-registry.apps-crc.testing",
-      "service-ca.crt"
-    ],
     "node_selector": "N/A"
   },
   {
     "namespace": "test-ajpardos",
     "configmap_name": "nodejs-basic-1-global-ca",
-    "configmap_data_keys": [
-      "ca-bundle.crt"
-    ],
     "node_selector": "N/A"
   },
   {
     "namespace": "test-ajpardos",
     "configmap_name": "nodejs-basic-1-sys-config",
-    "configmap_data_keys": [],
     "node_selector": "N/A"
   },
   {
     "namespace": "test-ajpardos",
     "configmap_name": "openshift-service-ca.crt",
-    "configmap_data_keys": [
-      "service-ca.crt"
-    ],
     "node_selector": "N/A"
   }
 ]
