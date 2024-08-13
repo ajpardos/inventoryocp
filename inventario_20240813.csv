@@ -1,0 +1,57 @@
+namespace,pod_name,node_name,pod_resources,pod_readiness_probe,pod_liveness_probe,pod_image,pod_cpu_usage,pod_memory_usage,deployment_name,deployment_replicas,deployment_labels,service_name,service_type,service_ports,route_name,route_host,hpa_name,hpa_min_replicas,hpa_max_replicas,hpa_current_cpu_utilization,quota_name,quota_limits,pv_name,pv_capacity,pv_access_modes,pv_reclaim_policy,pvc_name,pvc_volume_name,pvc_access_modes,pvc_capacity,secret_name,secret_type,configmap_name,configmap_data_keys,node_selector
+hello-world,hellogo-1-build,crc,{},{},{},quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46,N/A,N/A,,,,,,,,,,,,,,,,,,,,,,,,,,,N/A
+hello-world,hellogo-68b9b67b9b-fh74x,crc,{},{},{},image-registry.openshift-image-registry.svc:5000/hello-world/hellogo@sha256:9367d485e8778b4ab07b6385de85afee1cd5a878a6ea3ad8d37233d111c157df,0m,11Mi,,,,,,,,,,,,,,,,,,,,,,,,,,,N/A
+hello-world,,,,,,,,,hellogo,1,"{'app': 'hellogo', 'app.kubernetes.io/component': 'hellogo', 'app.kubernetes.io/instance': 'hellogo'}",,,,,,,,,,,,,,,,,,,,,,,,N/A
+hello-world,,,,,,,,,,,,hellogo,ClusterIP,"[{'port': 3000, 'protocol': 'TCP', 'targetPort': 3000}]",,,,,,,,,,,,,,,,,,,,,N/A
+hello-world,,,,,,,,,,,,,,,hellogo,hellogo-hello-world.apps-crc.testing,,,,,,,,,,,,,,,,,,,N/A
+hello-world,,,,,,,,,,,,,,,,,,,,,hello-world,"{'limits.cpu': '500m', 'limits.memory': '512Mi', 'pods': '14', 'requests.cpu': '250m', 'requests.memory': '107374182400m'}",,,,,,,,,,,,,N/A
+hello-world,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,builder-dockercfg-cjmc2,kubernetes.io/dockercfg,,,N/A
+hello-world,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,builder-token-whtvr,kubernetes.io/service-account-token,,,N/A
+hello-world,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,default-dockercfg-9dcfn,kubernetes.io/dockercfg,,,N/A
+hello-world,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,default-token-bvhbb,kubernetes.io/service-account-token,,,N/A
+hello-world,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,deployer-dockercfg-rhqzr,kubernetes.io/dockercfg,,,N/A
+hello-world,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,deployer-token-dp7mf,kubernetes.io/service-account-token,,,N/A
+hello-world,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,hellogo-1-ca,"['default-route-openshift-image-registry.apps-crc.testing', 'service-ca.crt']",N/A
+hello-world,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,hellogo-1-global-ca,['ca-bundle.crt'],N/A
+hello-world,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,hellogo-1-sys-config,[],N/A
+hello-world,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kube-root-ca.crt,['ca.crt'],N/A
+hello-world,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,openshift-service-ca.crt,['service-ca.crt'],N/A
+openshift,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,builder-dockercfg-xgwqb,kubernetes.io/dockercfg,,,N/A
+openshift,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,builder-token-cq5lf,kubernetes.io/service-account-token,,,N/A
+openshift,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,default-dockercfg-zbgk5,kubernetes.io/dockercfg,,,N/A
+openshift,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,default-token-pvvl2,kubernetes.io/service-account-token,,,N/A
+openshift,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,deployer-dockercfg-hd82l,kubernetes.io/dockercfg,,,N/A
+openshift,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,deployer-token-9vm8q,kubernetes.io/service-account-token,,,N/A
+openshift,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kube-root-ca.crt,['ca.crt'],N/A
+openshift,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,openshift-service-ca.crt,['service-ca.crt'],N/A
+test-ajpardos,java-springboot-basic-1-build,crc,{},{},{},quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46,N/A,N/A,,,,,,,,,,,,,,,,,,,,,,,,,,,N/A
+test-ajpardos,java-springboot-basic-85df8f5bc9-fpb2v,crc,"{'requests': {'cpu': '10m', 'memory': '180Mi'}}",{},{},image-registry.openshift-image-registry.svc:5000/test-ajpardos/java-springboot-basic:latest,0m,172Mi,,,,,,,,,,,,,,,,,,,,,,,,,,,N/A
+test-ajpardos,nodejs-basic-1-build,crc,{},{},{},quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46,N/A,N/A,,,,,,,,,,,,,,,,,,,,,,,,,,,N/A
+test-ajpardos,nodejs-basic-6c866577f6-zf5zk,crc,"{'requests': {'cpu': '10m', 'memory': '50Mi'}}",{},{},image-registry.openshift-image-registry.svc:5000/test-ajpardos/nodejs-basic:latest,4m,60Mi,,,,,,,,,,,,,,,,,,,,,,,,,,,N/A
+test-ajpardos,,,,,,,,,java-springboot-basic,1,"{'app': 'java-springboot-basic', 'app.kubernetes.io/component': 'java-springboot-basic', 'app.kubernetes.io/instance': 'java-springboot-basic', 'app.kubernetes.io/name': 'java-springboot-basic', 'app.kubernetes.io/part-of': 'sample-app', 'app.openshift.io/runtime': 'spring-boot'}",,,,,,,,,,,,,,,,,,,,,,,,N/A
+test-ajpardos,,,,,,,,,nodejs-basic,1,"{'app': 'nodejs-basic', 'app.kubernetes.io/component': 'nodejs-basic', 'app.kubernetes.io/instance': 'nodejs-basic', 'app.kubernetes.io/name': 'nodejs-basic', 'app.kubernetes.io/part-of': 'sample-app', 'app.openshift.io/runtime': 'nodejs'}",,,,,,,,,,,,,,,,,,,,,,,,N/A
+test-ajpardos,,,,,,,,,,,,java-springboot-basic,ClusterIP,"[{'name': 'http-8081', 'port': 8081, 'protocol': 'TCP', 'targetPort': 8081}]",,,,,,,,,,,,,,,,,,,,,N/A
+test-ajpardos,,,,,,,,,,,,nodejs-basic,ClusterIP,"[{'name': 'http-3001', 'port': 3001, 'protocol': 'TCP', 'targetPort': 3001}]",,,,,,,,,,,,,,,,,,,,,N/A
+test-ajpardos,,,,,,,,,,,,,,,java-springboot-basic,java-springboot-basic-test-ajpardos.apps-crc.testing,,,,,,,,,,,,,,,,,,,N/A
+test-ajpardos,,,,,,,,,,,,,,,nodejs-basic,nodejs-basic-test-ajpardos.apps-crc.testing,,,,,,,,,,,,,,,,,,,N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,test-ajpardos,"{'limits.cpu': '500m', 'limits.memory': '512Mi', 'pods': '4', 'requests.cpu': '250m', 'requests.memory': '107374182400m'}",,,,,,,,,,,,,N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,builder-dockercfg-cx9hw,kubernetes.io/dockercfg,,,N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,builder-token-tsrt4,kubernetes.io/service-account-token,,,N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,default-dockercfg-d8qxs,kubernetes.io/dockercfg,,,N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,default-token-ccqj9,kubernetes.io/service-account-token,,,N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,deployer-dockercfg-5qrtl,kubernetes.io/dockercfg,,,N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,deployer-token-ngs9f,kubernetes.io/service-account-token,,,N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,dotnet-sample-generic-webhook-secret,Opaque,,,N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,dotnet-sample-github-webhook-secret,Opaque,,,N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,java-springboot-basic-generic-webhook-secret,Opaque,,,N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,nginx-sample-generic-webhook-secret,Opaque,,,N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,nginx-sample-github-webhook-secret,Opaque,,,N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,nodejs-basic-generic-webhook-secret,Opaque,,,N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,java-springboot-basic-1-ca,"['default-route-openshift-image-registry.apps-crc.testing', 'service-ca.crt']",N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,java-springboot-basic-1-global-ca,['ca-bundle.crt'],N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,java-springboot-basic-1-sys-config,[],N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kube-root-ca.crt,['ca.crt'],N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,nodejs-basic-1-ca,"['default-route-openshift-image-registry.apps-crc.testing', 'service-ca.crt']",N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,nodejs-basic-1-global-ca,['ca-bundle.crt'],N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,nodejs-basic-1-sys-config,[],N/A
+test-ajpardos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,openshift-service-ca.crt,['service-ca.crt'],N/A
