@@ -1,542 +1,261 @@
 [
   {
-    "name": "hellogo-1-build",
     "namespace": "hello-world",
-    "type": "pods",
-    "created_at": "2024-07-10T19:21:35Z",
-    "status": "Succeeded",
-    "selector": "{}",
-    "labels": "{\"openshift.io/build.name\": \"hellogo-1\"}",
-    "annotations": "{\"k8s.ovn.org/pod-networks\": \"{\\\"default\\\":{\\\"ip_addresses\\\":[\\\"10.217.0.199/23\\\"],\\\"mac_address\\\":\\\"0a:58:0a:d9:00:c7\\\",\\\"gateway_ips\\\":[\\\"10.217.0.1\\\"],\\\"routes\\\":[{\\\"dest\\\":\\\"10.217.0.0/22\\\",\\\"nextHop\\\":\\\"10.217.0.1\\\"},{\\\"dest\\\":\\\"10.217.4.0/23\\\",\\\"nextHop\\\":\\\"10.217.0.1\\\"},{\\\"dest\\\":\\\"100.64.0.0/16\\\",\\\"nextHop\\\":\\\"10.217.0.1\\\"}],\\\"ip_address\\\":\\\"10.217.0.199/23\\\",\\\"gateway_ip\\\":\\\"10.217.0.1\\\"}}\", \"k8s.v1.cni.cncf.io/network-status\": \"[{\\n    \\\"name\\\": \\\"ovn-kubernetes\\\",\\n    \\\"interface\\\": \\\"eth0\\\",\\n    \\\"ips\\\": [\\n        \\\"10.217.0.199\\\"\\n    ],\\n    \\\"mac\\\": \\\"0a:58:0a:d9:00:c7\\\",\\n    \\\"default\\\": true,\\n    \\\"dns\\\": {}\\n}]\", \"openshift.io/build.name\": \"hellogo-1\", \"openshift.io/scc\": \"privileged\"}"
+    "pod_name": "hellogo-1-build",
+    "node_name": "crc",
+    "resources": {},
+    "readiness_probe": {},
+    "liveness_probe": {},
+    "image": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46",
+    "pod_cpu_usage": "N/A",
+    "pod_memory_usage": "N/A"
   },
   {
-    "name": "hellogo-68b9b67b9b-fh74x",
     "namespace": "hello-world",
-    "type": "pods",
-    "created_at": "2024-07-10T19:24:29Z",
-    "status": "Running",
-    "selector": "{}",
-    "labels": "{\"deployment\": \"hellogo\", \"pod-template-hash\": \"68b9b67b9b\"}",
-    "annotations": "{\"k8s.ovn.org/pod-networks\": \"{\\\"default\\\":{\\\"ip_addresses\\\":[\\\"10.217.0.201/23\\\"],\\\"mac_address\\\":\\\"0a:58:0a:d9:00:c9\\\",\\\"gateway_ips\\\":[\\\"10.217.0.1\\\"],\\\"routes\\\":[{\\\"dest\\\":\\\"10.217.0.0/22\\\",\\\"nextHop\\\":\\\"10.217.0.1\\\"},{\\\"dest\\\":\\\"10.217.4.0/23\\\",\\\"nextHop\\\":\\\"10.217.0.1\\\"},{\\\"dest\\\":\\\"100.64.0.0/16\\\",\\\"nextHop\\\":\\\"10.217.0.1\\\"}],\\\"ip_address\\\":\\\"10.217.0.201/23\\\",\\\"gateway_ip\\\":\\\"10.217.0.1\\\"}}\", \"k8s.v1.cni.cncf.io/network-status\": \"[{\\n    \\\"name\\\": \\\"ovn-kubernetes\\\",\\n    \\\"interface\\\": \\\"eth0\\\",\\n    \\\"ips\\\": [\\n        \\\"10.217.0.201\\\"\\n    ],\\n    \\\"mac\\\": \\\"0a:58:0a:d9:00:c9\\\",\\n    \\\"default\\\": true,\\n    \\\"dns\\\": {}\\n}]\", \"openshift.io/generated-by\": \"OpenShiftNewApp\", \"openshift.io/scc\": \"restricted-v2\", \"seccomp.security.alpha.kubernetes.io/pod\": \"runtime/default\"}"
-  },
-  {
-    "name": "hellogo",
-    "namespace": "hello-world",
-    "type": "services",
-    "created_at": "2024-07-10T19:21:53Z",
-    "status": "N/A",
-    "selector": "{\"deployment\": \"hellogo\"}",
-    "labels": "{\"app\": \"hellogo\", \"app.kubernetes.io/component\": \"hellogo\", \"app.kubernetes.io/instance\": \"hellogo\"}",
-    "annotations": "{}"
-  },
-  {
-    "name": "hellogo",
-    "namespace": "hello-world",
-    "type": "deployments",
-    "created_at": "2024-07-10T19:21:35Z",
-    "status": "N/A",
-    "selector": "{\"matchLabels\": {\"deployment\": \"hellogo\"}}",
-    "labels": "{\"app\": \"hellogo\", \"app.kubernetes.io/component\": \"hellogo\", \"app.kubernetes.io/instance\": \"hellogo\"}",
-    "annotations": "{\"deployment.kubernetes.io/revision\": \"2\", \"image.openshift.io/triggers\": \"[{\\\"from\\\":{\\\"kind\\\":\\\"ImageStreamTag\\\",\\\"name\\\":\\\"hellogo:latest\\\"},\\\"fieldPath\\\":\\\"spec.template.spec.containers[?(@.name==\\\\\\\"hellogo\\\\\\\")].image\\\"}]\", \"openshift.io/generated-by\": \"OpenShiftNewApp\"}"
-  },
-  {
-    "name": "hellogo",
-    "namespace": "hello-world",
-    "type": "routes",
-    "created_at": "2024-07-10T19:22:01Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{\"app\": \"hellogo\", \"app.kubernetes.io/component\": \"hellogo\", \"app.kubernetes.io/instance\": \"hellogo\"}",
-    "annotations": "{\"openshift.io/host.generated\": \"true\"}"
-  },
-  {
-    "name": "hellogo-1-ca",
-    "namespace": "hello-world",
-    "type": "configmaps",
-    "created_at": "2024-07-10T19:21:35Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{}"
-  },
-  {
-    "name": "hellogo-1-global-ca",
-    "namespace": "hello-world",
-    "type": "configmaps",
-    "created_at": "2024-07-10T19:21:35Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{}"
-  },
-  {
-    "name": "hellogo-1-sys-config",
-    "namespace": "hello-world",
-    "type": "configmaps",
-    "created_at": "2024-07-10T19:21:35Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{}"
-  },
-  {
-    "name": "kube-root-ca.crt",
-    "namespace": "hello-world",
-    "type": "configmaps",
-    "created_at": "2024-07-10T19:21:12Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"kubernetes.io/description\": \"Contains a CA bundle that can be used to verify the kube-apiserver when using internal endpoints such as the internal service IP or kubernetes.default.svc. No other usage is guaranteed across distributions of Kubernetes clusters.\"}"
-  },
-  {
-    "name": "openshift-service-ca.crt",
-    "namespace": "hello-world",
-    "type": "configmaps",
-    "created_at": "2024-07-10T19:21:12Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"service.beta.openshift.io/inject-cabundle\": \"true\"}"
+    "pod_name": "hellogo-68b9b67b9b-fh74x",
+    "node_name": "crc",
+    "resources": {},
+    "readiness_probe": {},
+    "liveness_probe": {},
+    "image": "image-registry.openshift-image-registry.svc:5000/hello-world/hellogo@sha256:9367d485e8778b4ab07b6385de85afee1cd5a878a6ea3ad8d37233d111c157df",
+    "pod_cpu_usage": "0m",
+    "pod_memory_usage": "3Mi"
   },
   {
     "name": "builder-dockercfg-cjmc2",
-    "namespace": "hello-world",
-    "type": "secrets",
-    "created_at": "2024-07-10T19:21:12Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"kubernetes.io/service-account.name\": \"builder\", \"kubernetes.io/service-account.uid\": \"2acf4bdd-ac91-4b2f-9dc2-93b670512df6\", \"openshift.io/token-secret.name\": \"builder-token-whtvr\", \"openshift.io/token-secret.value\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Ik5WdGh6NXBCOEozdDh2eUNIdVhaSGZFWmxTN3VybUFFeHVJZFNkU2ZGWEEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJoZWxsby13b3JsZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJidWlsZGVyLXRva2VuLXdodHZyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImJ1aWxkZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiIyYWNmNGJkZC1hYzkxLTRiMmYtOWRjMi05M2I2NzA1MTJkZjYiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6aGVsbG8td29ybGQ6YnVpbGRlciJ9.nHBaxlu0hUUv6SnaHJfukbz5Jkycp12te4DOsEB2N1V4cLFk3inS6XeOxhus6uusCsOXwHTbexGcFhADcU56UAX4Rw-VNv_xFgdJs-pQ9KaUvQdZeO9rqRzSSjuBTVnvSqMQgFDHJ_06Oe3aUUoAGNUDaPJYS7Ye2-5XGgs49TeIpUet4fKe457ZXj-QjmHsDhpK5idN1Y_8eRDYc18ZJDuz6dnGsB5mq5jQTQ0IrBJTRKcpL4DjczM1uxrXHm6f9Bku4ztTfj6iJxFfrEaQXtiQQU9mh-e1OCn8-jIM6rcfDC08L-mXRz_oa8g963MRQP0MMZjOncyPV2fuVHkJPMgyFzzvAX_UnoCVjpL4e9mIWjK45PlnQwXgjNQmEV5lAqPDCnWoKuF3BO3bkM48WfkaWecyVa2K2g7DoXeEQVcBuuBNBF4Qyd2Fw2W_qHBRnX1kQevbXirWGS3ia-QEBDHeVdr1FFQT7Y_OOB6QgsF-GoaZiMxiunm3LoCzGeIMZwS1Nh6akPFz347m4M9vZbqHG-ZTOxDn4UCmc_mDlKtvJqDnWm0ofmk34UBfS2E0dIDTVNT-SnLTvNWsbJsGrwoX0vOnGOrRkySSZcPfZTua3eNEVhyDzAMzKmISUAUmzNMjnXZx26w3HOjb7-GnZLdqZoQoOCZih_fbz-lWSB4\"}"
+    "type": "kubernetes.io/dockercfg"
   },
   {
     "name": "builder-token-whtvr",
-    "namespace": "hello-world",
-    "type": "secrets",
-    "created_at": "2024-07-10T19:21:12Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{\"kubernetes.io/legacy-token-last-used\": \"2024-07-10\"}",
-    "annotations": "{\"kubernetes.io/created-by\": \"openshift.io/create-dockercfg-secrets\", \"kubernetes.io/service-account.name\": \"builder\", \"kubernetes.io/service-account.uid\": \"2acf4bdd-ac91-4b2f-9dc2-93b670512df6\"}"
+    "type": "kubernetes.io/service-account-token"
   },
   {
     "name": "default-dockercfg-9dcfn",
-    "namespace": "hello-world",
-    "type": "secrets",
-    "created_at": "2024-07-10T19:21:12Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"kubernetes.io/service-account.name\": \"default\", \"kubernetes.io/service-account.uid\": \"031684fa-0636-418f-82a7-39d2c3a610ce\", \"openshift.io/token-secret.name\": \"default-token-bvhbb\", \"openshift.io/token-secret.value\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Ik5WdGh6NXBCOEozdDh2eUNIdVhaSGZFWmxTN3VybUFFeHVJZFNkU2ZGWEEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJoZWxsby13b3JsZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJkZWZhdWx0LXRva2VuLWJ2aGJiIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImRlZmF1bHQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiIwMzE2ODRmYS0wNjM2LTQxOGYtODJhNy0zOWQyYzNhNjEwY2UiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6aGVsbG8td29ybGQ6ZGVmYXVsdCJ9.Xc8Ua29sJkx7S-Stic7pZvEpYZsPXXTdod9HG5EMISi2v4kl89t5CHZWdrKd1rvA614kTBnJV5yIrR5ECOhJe7aUg8zLnfBmKIc2RNI6H_0LhxaalR5xvusWu-v1AJD_nTKZvUzWXc8iTSehENJDVPfyRqocDMNIg6aw4egoB3JJ32Ps-puwJFvOr0lt_4Ke4-xuypRucNHHHc5ycgA4iNAtOX4xXriBKQ3EX6gn-o68ZhMC0DaNxvZoSMLc2G3XPZOYYcjSnvSTkPojERxnhTHbzV8S0NL6e-faVfwSN0R9zGnC5bgScxKEmifaWYzErsvMBhipj6PEzU5jDvIQDIypC9l5Cllj5baATQAmiJxmHYRkTzxDae2_WDSVMR6KPSR7Tgj5oSFIDUTUmCzNjP57Vw1R4kleza4bCgCcVAm8odaSUiV2sk1vB7A0N4Wr-9z6y7ALPo2xiN5oqdgmaR-y5SKSoJpknEnjqweaA3mubJ5HQh-ZRCNhCPcYJtIiA-h-p7rAoD27vJFYWcWXh9m-qQIkWsoNcvxmfKUEIRGIRaMYwWAr7HyFuxbt5Xk3tIAE7Bs_4t3cnanmKij7C1KlojRxxnkXpzO3RfSBEHgKfLo2ab1SYp-4ikwsbkyG-S9tXWb0sN_KZ9hn1ER86Ln4pgHmRb3P1z1E_KOOUpA\"}"
+    "type": "kubernetes.io/dockercfg"
   },
   {
     "name": "default-token-bvhbb",
-    "namespace": "hello-world",
-    "type": "secrets",
-    "created_at": "2024-07-10T19:21:12Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{\"kubernetes.io/legacy-token-last-used\": \"2024-07-10\"}",
-    "annotations": "{\"kubernetes.io/created-by\": \"openshift.io/create-dockercfg-secrets\", \"kubernetes.io/service-account.name\": \"default\", \"kubernetes.io/service-account.uid\": \"031684fa-0636-418f-82a7-39d2c3a610ce\"}"
+    "type": "kubernetes.io/service-account-token"
   },
   {
     "name": "deployer-dockercfg-rhqzr",
-    "namespace": "hello-world",
-    "type": "secrets",
-    "created_at": "2024-07-10T19:21:12Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"kubernetes.io/service-account.name\": \"deployer\", \"kubernetes.io/service-account.uid\": \"c1d0ef64-a667-49f8-ba8a-6abe90d3ebe5\", \"openshift.io/token-secret.name\": \"deployer-token-dp7mf\", \"openshift.io/token-secret.value\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Ik5WdGh6NXBCOEozdDh2eUNIdVhaSGZFWmxTN3VybUFFeHVJZFNkU2ZGWEEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJoZWxsby13b3JsZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJkZXBsb3llci10b2tlbi1kcDdtZiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJkZXBsb3llciIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImMxZDBlZjY0LWE2NjctNDlmOC1iYThhLTZhYmU5MGQzZWJlNSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpoZWxsby13b3JsZDpkZXBsb3llciJ9.BBx3RtU9KljH9hBCPS2i-_26bwd8bdMFnBNy3c_t2tVuaGLoj9jtO4ReyLHL54LgjtTqH-4NiSQCIRkA34MAspRxblGUjB33YzEL7oxEu8qIkiOU3bYykHKPLIUroZR91McYN0CWdLX1qnkLUQN_ya_i1HKiyQ1IrOi_4Lpa1MRbSQSK7ue52isu1CBSS1pal_SBu9r9tl5WNVWjNjrC4FdPa6rAkDOU3492MvSORnoh4OxkrxAq5CzMUJ73xnkpCrcxvpbQFSBIEZE7P3CjT8wzxVceJwFOafpHXp5mwJZvsUHlMvE9rLVfo55gqCopTDA13sTC8KAXjpows1esy05FVGVNB3_sfpHyX6GqmVXAaYusiIQvcvg-M3vvsZfhk2oilLLFrNbev1ZW7GvleZVoxpRzn9BoLeQnrGpp7_fZTaxa57gGoCSDuq5e34Y-fNe7G4EZ3Opo2NRC95qarDvuQ_leeD1eh_zDDIlM4mVq0w0d7QSg7Cd35VJX_uNpe73VgGoE_7nQ54S7puPaXU3jRf42EVnnVeacSUphoDIPgrVbBg1Mq5gDY-b2gfjWm6tE981HGmU6qvPMXzZuOgnaz7483mG67OjJc6WQkCn50wr93UYm5NI91Yyf4dpIYdGPM_GButyRGUFSfVdydth-jDLTPDFmDe0Y7CHFl6U\"}"
+    "type": "kubernetes.io/dockercfg"
   },
   {
     "name": "deployer-token-dp7mf",
-    "namespace": "hello-world",
-    "type": "secrets",
-    "created_at": "2024-07-10T19:21:12Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"kubernetes.io/created-by\": \"openshift.io/create-dockercfg-secrets\", \"kubernetes.io/service-account.name\": \"deployer\", \"kubernetes.io/service-account.uid\": \"c1d0ef64-a667-49f8-ba8a-6abe90d3ebe5\"}"
+    "type": "kubernetes.io/service-account-token"
+  },
+  {
+    "name": "hellogo-1-ca",
+    "data_keys": [
+      "default-route-openshift-image-registry.apps-crc.testing",
+      "service-ca.crt"
+    ]
+  },
+  {
+    "name": "hellogo-1-global-ca",
+    "data_keys": [
+      "ca-bundle.crt"
+    ]
+  },
+  {
+    "name": "hellogo-1-sys-config",
+    "data_keys": []
   },
   {
     "name": "kube-root-ca.crt",
-    "namespace": "openshift",
-    "type": "configmaps",
-    "created_at": "2024-05-26T12:23:28Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"kubernetes.io/description\": \"Contains a CA bundle that can be used to verify the kube-apiserver when using internal endpoints such as the internal service IP or kubernetes.default.svc. No other usage is guaranteed across distributions of Kubernetes clusters.\"}"
+    "data_keys": [
+      "ca.crt"
+    ]
   },
   {
     "name": "openshift-service-ca.crt",
-    "namespace": "openshift",
-    "type": "configmaps",
-    "created_at": "2024-05-26T12:23:28Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"service.beta.openshift.io/inject-cabundle\": \"true\"}"
+    "data_keys": [
+      "service-ca.crt"
+    ]
   },
   {
     "name": "builder-dockercfg-xgwqb",
-    "namespace": "openshift",
-    "type": "secrets",
-    "created_at": "2024-05-27T13:06:15Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"kubernetes.io/service-account.name\": \"builder\", \"kubernetes.io/service-account.uid\": \"5bf4b138-f8c1-4808-8e7d-7e8d3b379e83\", \"openshift.io/token-secret.name\": \"builder-token-cq5lf\", \"openshift.io/token-secret.value\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Ik5WdGh6NXBCOEozdDh2eUNIdVhaSGZFWmxTN3VybUFFeHVJZFNkU2ZGWEEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJvcGVuc2hpZnQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlY3JldC5uYW1lIjoiYnVpbGRlci10b2tlbi1jcTVsZiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJidWlsZGVyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiNWJmNGIxMzgtZjhjMS00ODA4LThlN2QtN2U4ZDNiMzc5ZTgzIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Om9wZW5zaGlmdDpidWlsZGVyIn0.puYOFviJbz6vyEjeSWuAkbx6SzBJUm7VtlcmLbXveqnPLq4CxO3_ZQHyny9L1NIKKZMMLDLlJZowz0qS_wcM2V0cK39xV8iYlqqvIsJ6fte7SGEV4sVCzh9MwY_m7cwh2A24_2vMBkIhb2TGf54UcX0Ww7KpSu1JzCrDZE_Ut-W7C5NFj-kYSoPJYjLM1x8D_hK4ymkSh3v4pyBuW3Phgj6srTQTMiksuToOAqwnmlsQNxTgcJAI07Isw_9Ze5y9UnBESQEzhab-4x6lo0uvxU5kAR-qQ0ZEklCvoqjyLdgEbek5X25b5lXxSMzKhq-tUc4l6poBPVuyBXLhaBpdXVnNZ3z5wGYN283SuFnC104MV1polwm6GxWYomk3pB-MrS2u9cpAYMi0VNK-BmlhXBf7tOopW4YL8mhTynQhyqHGBBUfMw7el--TCkhylzPFeU46YcTMp0lGkNiC7bPJq2tOX75zJ-fLJmftOwAJMJrqpNhOgtgx9hOQhSW-X6u2UpgBWXG4mRSGTQnCtkzkDdLyyA_DPx_z9o778qhhuLdziP6wW9x6jAI781GCRoLsUScozux9sv0ydxoCcgty1uJSDNo6NFmsNUZ9G0J7AJEmguRcQITTbuF3A0i7F9yWK1Nn_5I_ulm2N2kJTNOEmqSoO35UqsJgMfJsQoXpmAM\"}"
+    "type": "kubernetes.io/dockercfg"
   },
   {
     "name": "builder-token-cq5lf",
-    "namespace": "openshift",
-    "type": "secrets",
-    "created_at": "2024-05-27T13:06:09Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"kubernetes.io/created-by\": \"openshift.io/create-dockercfg-secrets\", \"kubernetes.io/service-account.name\": \"builder\", \"kubernetes.io/service-account.uid\": \"5bf4b138-f8c1-4808-8e7d-7e8d3b379e83\"}"
+    "type": "kubernetes.io/service-account-token"
   },
   {
     "name": "default-dockercfg-zbgk5",
-    "namespace": "openshift",
-    "type": "secrets",
-    "created_at": "2024-05-27T13:06:15Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"kubernetes.io/service-account.name\": \"default\", \"kubernetes.io/service-account.uid\": \"c6ee6272-a5a5-49ec-b47d-67bee7b26691\", \"openshift.io/token-secret.name\": \"default-token-pvvl2\", \"openshift.io/token-secret.value\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Ik5WdGh6NXBCOEozdDh2eUNIdVhaSGZFWmxTN3VybUFFeHVJZFNkU2ZGWEEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJvcGVuc2hpZnQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlY3JldC5uYW1lIjoiZGVmYXVsdC10b2tlbi1wdnZsMiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiYzZlZTYyNzItYTVhNS00OWVjLWI0N2QtNjdiZWU3YjI2NjkxIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Om9wZW5zaGlmdDpkZWZhdWx0In0.oV2biQonGxZAROA0b6s0Vovu6OgXBNHxRbCIOf9rbGp_FckranMO0plyLAnJMhlwDUs794sLF9d7mvaY9Bhzn5e7sTOBwtix5TBaFG6Pqm4vLddkLE4vjxLwqyBVfpQPDHuphyy7veaQ_hYFWKSE7JW8L5S12Kyvylw7SqVhn-EZetCkbl_Ixf308mBF1Iy77njBQwBaXLUJVN-Lc_voyVen5qYZUPx-0aRnya4swXdZ7KRsLAyS0dTRDG4la8u4I4F1qbjw1BiJ-Iu7fnkMmsi9--SE65HTny1_CLD5nYnnc1_1W8_GYETDx4ZgKg47QpaO6WbUlubBm94pREvZr74h0hSAiPxaSWyElmUtmd5IqV3l661TqqaodcIslRQ_qVR1-uqyFRJFiI6zvp2j9puU_Kw4TQuj11sjjWBtAs_Z0UX0bdG5HH5JvscyL2xejXCm5K_AOpM-u8U3B1EJxF6w6PqcwdKT59Q7iGbypjyJYIsnbE83iilOMZY7U8e5bw8WabSHJ5zwbk9olm4VQDsuURiKnhU2Kft6GKLC5xcFbiJZyWPbGKXt6Cu_wRzuCsxplF-8V7m3OChOmw9UeHYLUlmReAyqDcbWJ9RptDQzhqDa9Vnk89S8T5jLq7jQ2WlV6hpCKTF746ciHSURreVpuTOHlhz78mUYYsGZa8c\"}"
+    "type": "kubernetes.io/dockercfg"
   },
   {
     "name": "default-token-pvvl2",
-    "namespace": "openshift",
-    "type": "secrets",
-    "created_at": "2024-05-27T13:06:09Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"kubernetes.io/created-by\": \"openshift.io/create-dockercfg-secrets\", \"kubernetes.io/service-account.name\": \"default\", \"kubernetes.io/service-account.uid\": \"c6ee6272-a5a5-49ec-b47d-67bee7b26691\"}"
+    "type": "kubernetes.io/service-account-token"
   },
   {
     "name": "deployer-dockercfg-hd82l",
-    "namespace": "openshift",
-    "type": "secrets",
-    "created_at": "2024-05-27T13:06:15Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"kubernetes.io/service-account.name\": \"deployer\", \"kubernetes.io/service-account.uid\": \"20ba7e6d-5a2c-4b3f-9699-302d8b56946c\", \"openshift.io/token-secret.name\": \"deployer-token-9vm8q\", \"openshift.io/token-secret.value\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Ik5WdGh6NXBCOEozdDh2eUNIdVhaSGZFWmxTN3VybUFFeHVJZFNkU2ZGWEEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJvcGVuc2hpZnQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlY3JldC5uYW1lIjoiZGVwbG95ZXItdG9rZW4tOXZtOHEiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVwbG95ZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiIyMGJhN2U2ZC01YTJjLTRiM2YtOTY5OS0zMDJkOGI1Njk0NmMiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0OmRlcGxveWVyIn0.oRWuCltbQbe7WXTbtcQN_HodCQYe2Cuj8pCk35ikDeX7jtfpS57fIuMw9Pwnbbk27gNd5rowNkCuzH4-S5UaC5fvzV-epquX_w46Ct12LfFnNgOtlLrl2u_dzbdKd377qk0LqY8vp0QZCrK1VL0fpopdKX0D6rqXFZmaY2807FPsmE1W7pkLUyRUpHzS4pXUjs3m35rfzgzLt_dL-oVBucWT71XwJItTglMEygLAPY5ylZ4_cMoTOveFiYiug83kctf1WrcqfvaBMuvb2eu7EYfua1evkuJ7avMUga99u_JOEbdpa1YTdLPTZVoNdBPS1Uj8qCCA5ag4D_ZAWzQlzfbCKou8n9JRaduAecNjtmDi4DDglDIhz1i8k8dwZEIsItZ4XNwMUdrHCsiOTljUV0IRff1zwyVk2QB5sL3b_whXuU7vD-RwrID3a3wz2x8I0XvRFX1sM0UT8rHYjl4msuaa2IdV94r6KVLmpB1uYAvGRtKXOl5QTu5rgJ6eSzvJWdCpoXpNr0ofVN2NxskK261MUhTLIAjeMbayCThxTYHpROh8gOONV3U1PYO5QPJTxNJ2p5KflKSpNNzFS1FCsMkUQI6dUBXV8FmKDfu0eCaLLVvzIUIPtoz2TkP-cG43OLktFG9lmlVPjEKOnJfaZT51MpOjssaPvF52z29o37M\"}"
+    "type": "kubernetes.io/dockercfg"
   },
   {
     "name": "deployer-token-9vm8q",
-    "namespace": "openshift",
-    "type": "secrets",
-    "created_at": "2024-05-27T13:06:10Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"kubernetes.io/created-by\": \"openshift.io/create-dockercfg-secrets\", \"kubernetes.io/service-account.name\": \"deployer\", \"kubernetes.io/service-account.uid\": \"20ba7e6d-5a2c-4b3f-9699-302d8b56946c\"}"
-  },
-  {
-    "name": "java-springboot-basic-1-build",
-    "namespace": "test-ajpardos",
-    "type": "pods",
-    "created_at": "2024-07-10T15:39:20Z",
-    "status": "Succeeded",
-    "selector": "{}",
-    "labels": "{\"openshift.io/build.name\": \"java-springboot-basic-1\"}",
-    "annotations": "{\"k8s.ovn.org/pod-networks\": \"{\\\"default\\\":{\\\"ip_addresses\\\":[\\\"10.217.0.90/23\\\"],\\\"mac_address\\\":\\\"0a:58:0a:d9:00:5a\\\",\\\"gateway_ips\\\":[\\\"10.217.0.1\\\"],\\\"routes\\\":[{\\\"dest\\\":\\\"10.217.0.0/22\\\",\\\"nextHop\\\":\\\"10.217.0.1\\\"},{\\\"dest\\\":\\\"10.217.4.0/23\\\",\\\"nextHop\\\":\\\"10.217.0.1\\\"},{\\\"dest\\\":\\\"100.64.0.0/16\\\",\\\"nextHop\\\":\\\"10.217.0.1\\\"}],\\\"ip_address\\\":\\\"10.217.0.90/23\\\",\\\"gateway_ip\\\":\\\"10.217.0.1\\\"}}\", \"k8s.v1.cni.cncf.io/network-status\": \"[{\\n    \\\"name\\\": \\\"ovn-kubernetes\\\",\\n    \\\"interface\\\": \\\"eth0\\\",\\n    \\\"ips\\\": [\\n        \\\"10.217.0.90\\\"\\n    ],\\n    \\\"mac\\\": \\\"0a:58:0a:d9:00:5a\\\",\\n    \\\"default\\\": true,\\n    \\\"dns\\\": {}\\n}]\", \"openshift.io/build.name\": \"java-springboot-basic-1\", \"openshift.io/scc\": \"privileged\"}"
-  },
-  {
-    "name": "java-springboot-basic-85df8f5bc9-fpb2v",
-    "namespace": "test-ajpardos",
-    "type": "pods",
-    "created_at": "2024-07-10T15:39:20Z",
-    "status": "Running",
-    "selector": "{}",
-    "labels": "{\"app\": \"java-springboot-basic\", \"deployment\": \"java-springboot-basic\", \"pod-template-hash\": \"85df8f5bc9\"}",
-    "annotations": "{\"k8s.ovn.org/pod-networks\": \"{\\\"default\\\":{\\\"ip_addresses\\\":[\\\"10.217.0.89/23\\\"],\\\"mac_address\\\":\\\"0a:58:0a:d9:00:59\\\",\\\"gateway_ips\\\":[\\\"10.217.0.1\\\"],\\\"routes\\\":[{\\\"dest\\\":\\\"10.217.0.0/22\\\",\\\"nextHop\\\":\\\"10.217.0.1\\\"},{\\\"dest\\\":\\\"10.217.4.0/23\\\",\\\"nextHop\\\":\\\"10.217.0.1\\\"},{\\\"dest\\\":\\\"100.64.0.0/16\\\",\\\"nextHop\\\":\\\"10.217.0.1\\\"}],\\\"ip_address\\\":\\\"10.217.0.89/23\\\",\\\"gateway_ip\\\":\\\"10.217.0.1\\\"}}\", \"k8s.v1.cni.cncf.io/network-status\": \"[{\\n    \\\"name\\\": \\\"ovn-kubernetes\\\",\\n    \\\"interface\\\": \\\"eth0\\\",\\n    \\\"ips\\\": [\\n        \\\"10.217.0.89\\\"\\n    ],\\n    \\\"mac\\\": \\\"0a:58:0a:d9:00:59\\\",\\n    \\\"default\\\": true,\\n    \\\"dns\\\": {}\\n}]\", \"openshift.io/scc\": \"restricted-v2\", \"seccomp.security.alpha.kubernetes.io/pod\": \"runtime/default\"}"
-  },
-  {
-    "name": "nodejs-basic-1-build",
-    "namespace": "test-ajpardos",
-    "type": "pods",
-    "created_at": "2024-07-10T21:54:21Z",
-    "status": "Succeeded",
-    "selector": "{}",
-    "labels": "{\"openshift.io/build.name\": \"nodejs-basic-1\"}",
-    "annotations": "{\"k8s.ovn.org/pod-networks\": \"{\\\"default\\\":{\\\"ip_addresses\\\":[\\\"10.217.1.18/23\\\"],\\\"mac_address\\\":\\\"0a:58:0a:d9:01:12\\\",\\\"gateway_ips\\\":[\\\"10.217.0.1\\\"],\\\"routes\\\":[{\\\"dest\\\":\\\"10.217.0.0/22\\\",\\\"nextHop\\\":\\\"10.217.0.1\\\"},{\\\"dest\\\":\\\"10.217.4.0/23\\\",\\\"nextHop\\\":\\\"10.217.0.1\\\"},{\\\"dest\\\":\\\"100.64.0.0/16\\\",\\\"nextHop\\\":\\\"10.217.0.1\\\"}],\\\"ip_address\\\":\\\"10.217.1.18/23\\\",\\\"gateway_ip\\\":\\\"10.217.0.1\\\"}}\", \"k8s.v1.cni.cncf.io/network-status\": \"[{\\n    \\\"name\\\": \\\"ovn-kubernetes\\\",\\n    \\\"interface\\\": \\\"eth0\\\",\\n    \\\"ips\\\": [\\n        \\\"10.217.1.18\\\"\\n    ],\\n    \\\"mac\\\": \\\"0a:58:0a:d9:01:12\\\",\\n    \\\"default\\\": true,\\n    \\\"dns\\\": {}\\n}]\", \"openshift.io/build.name\": \"nodejs-basic-1\", \"openshift.io/scc\": \"privileged\"}"
-  },
-  {
-    "name": "nodejs-basic-6c866577f6-zf5zk",
-    "namespace": "test-ajpardos",
-    "type": "pods",
-    "created_at": "2024-07-10T21:54:20Z",
-    "status": "Running",
-    "selector": "{}",
-    "labels": "{\"app\": \"nodejs-basic\", \"deployment\": \"nodejs-basic\", \"pod-template-hash\": \"6c866577f6\"}",
-    "annotations": "{\"k8s.ovn.org/pod-networks\": \"{\\\"default\\\":{\\\"ip_addresses\\\":[\\\"10.217.1.17/23\\\"],\\\"mac_address\\\":\\\"0a:58:0a:d9:01:11\\\",\\\"gateway_ips\\\":[\\\"10.217.0.1\\\"],\\\"routes\\\":[{\\\"dest\\\":\\\"10.217.0.0/22\\\",\\\"nextHop\\\":\\\"10.217.0.1\\\"},{\\\"dest\\\":\\\"10.217.4.0/23\\\",\\\"nextHop\\\":\\\"10.217.0.1\\\"},{\\\"dest\\\":\\\"100.64.0.0/16\\\",\\\"nextHop\\\":\\\"10.217.0.1\\\"}],\\\"ip_address\\\":\\\"10.217.1.17/23\\\",\\\"gateway_ip\\\":\\\"10.217.0.1\\\"}}\", \"k8s.v1.cni.cncf.io/network-status\": \"[{\\n    \\\"name\\\": \\\"ovn-kubernetes\\\",\\n    \\\"interface\\\": \\\"eth0\\\",\\n    \\\"ips\\\": [\\n        \\\"10.217.1.17\\\"\\n    ],\\n    \\\"mac\\\": \\\"0a:58:0a:d9:01:11\\\",\\n    \\\"default\\\": true,\\n    \\\"dns\\\": {}\\n}]\", \"openshift.io/scc\": \"restricted-v2\", \"seccomp.security.alpha.kubernetes.io/pod\": \"runtime/default\"}"
-  },
-  {
-    "name": "java-springboot-basic",
-    "namespace": "test-ajpardos",
-    "type": "services",
-    "created_at": "2024-07-10T15:39:20Z",
-    "status": "N/A",
-    "selector": "{\"app\": \"java-springboot-basic\", \"deployment\": \"java-springboot-basic\"}",
-    "labels": "{\"app\": \"java-springboot-basic\", \"app.kubernetes.io/component\": \"java-springboot-basic\", \"app.kubernetes.io/instance\": \"java-springboot-basic\", \"app.kubernetes.io/name\": \"java-springboot-basic\", \"app.kubernetes.io/part-of\": \"sample-app\", \"app.openshift.io/runtime\": \"spring-boot\"}",
-    "annotations": "{\"app.openshift.io/vcs-ref\": \"\", \"app.openshift.io/vcs-uri\": \"https://github.com/devfile-samples/devfile-sample-java-springboot-basic.git\", \"isFromDevfile\": \"true\", \"openshift.io/generated-by\": \"OpenShiftWebConsole\"}"
-  },
-  {
-    "name": "nodejs-basic",
-    "namespace": "test-ajpardos",
-    "type": "services",
-    "created_at": "2024-07-10T21:54:20Z",
-    "status": "N/A",
-    "selector": "{\"app\": \"nodejs-basic\", \"deployment\": \"nodejs-basic\"}",
-    "labels": "{\"app\": \"nodejs-basic\", \"app.kubernetes.io/component\": \"nodejs-basic\", \"app.kubernetes.io/instance\": \"nodejs-basic\", \"app.kubernetes.io/name\": \"nodejs-basic\", \"app.kubernetes.io/part-of\": \"sample-app\", \"app.openshift.io/runtime\": \"nodejs\"}",
-    "annotations": "{\"app.openshift.io/vcs-ref\": \"\", \"app.openshift.io/vcs-uri\": \"https://github.com/nodeshift-starters/devfile-sample.git\", \"isFromDevfile\": \"true\", \"openshift.io/generated-by\": \"OpenShiftWebConsole\"}"
-  },
-  {
-    "name": "java-springboot-basic",
-    "namespace": "test-ajpardos",
-    "type": "deployments",
-    "created_at": "2024-07-10T15:39:20Z",
-    "status": "N/A",
-    "selector": "{\"matchLabels\": {\"app\": \"java-springboot-basic\"}}",
-    "labels": "{\"app\": \"java-springboot-basic\", \"app.kubernetes.io/component\": \"java-springboot-basic\", \"app.kubernetes.io/instance\": \"java-springboot-basic\", \"app.kubernetes.io/name\": \"java-springboot-basic\", \"app.kubernetes.io/part-of\": \"sample-app\", \"app.openshift.io/runtime\": \"spring-boot\"}",
-    "annotations": "{\"alpha.image.policy.openshift.io/resolve-names\": \"*\", \"app.openshift.io/route-disabled\": \"false\", \"app.openshift.io/vcs-ref\": \"\", \"app.openshift.io/vcs-uri\": \"https://github.com/devfile-samples/devfile-sample-java-springboot-basic.git\", \"deployment.kubernetes.io/revision\": \"1\", \"image.openshift.io/triggers\": \"[{\\\"from\\\":{\\\"kind\\\":\\\"ImageStreamTag\\\",\\\"name\\\":\\\"java-springboot-basic:latest\\\",\\\"namespace\\\":\\\"test-ajpardos\\\"},\\\"fieldPath\\\":\\\"spec.template.spec.containers[?(@.name==\\\\\\\"java-springboot-basic\\\\\\\")].image\\\",\\\"paused\\\":\\\"false\\\"}]\", \"isFromDevfile\": \"true\", \"openshift.io/generated-by\": \"OpenShiftWebConsole\"}"
-  },
-  {
-    "name": "nodejs-basic",
-    "namespace": "test-ajpardos",
-    "type": "deployments",
-    "created_at": "2024-07-10T21:54:20Z",
-    "status": "N/A",
-    "selector": "{\"matchLabels\": {\"app\": \"nodejs-basic\"}}",
-    "labels": "{\"app\": \"nodejs-basic\", \"app.kubernetes.io/component\": \"nodejs-basic\", \"app.kubernetes.io/instance\": \"nodejs-basic\", \"app.kubernetes.io/name\": \"nodejs-basic\", \"app.kubernetes.io/part-of\": \"sample-app\", \"app.openshift.io/runtime\": \"nodejs\"}",
-    "annotations": "{\"alpha.image.policy.openshift.io/resolve-names\": \"*\", \"app.openshift.io/route-disabled\": \"false\", \"app.openshift.io/vcs-ref\": \"\", \"app.openshift.io/vcs-uri\": \"https://github.com/nodeshift-starters/devfile-sample.git\", \"deployment.kubernetes.io/revision\": \"1\", \"image.openshift.io/triggers\": \"[{\\\"from\\\":{\\\"kind\\\":\\\"ImageStreamTag\\\",\\\"name\\\":\\\"nodejs-basic:latest\\\",\\\"namespace\\\":\\\"test-ajpardos\\\"},\\\"fieldPath\\\":\\\"spec.template.spec.containers[?(@.name==\\\\\\\"nodejs-basic\\\\\\\")].image\\\",\\\"paused\\\":\\\"false\\\"}]\", \"isFromDevfile\": \"true\", \"openshift.io/generated-by\": \"OpenShiftWebConsole\"}"
-  },
-  {
-    "name": "java-springboot-basic",
-    "namespace": "test-ajpardos",
-    "type": "routes",
-    "created_at": "2024-07-10T15:39:20Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{\"app\": \"java-springboot-basic\", \"app.kubernetes.io/component\": \"java-springboot-basic\", \"app.kubernetes.io/instance\": \"java-springboot-basic\", \"app.kubernetes.io/name\": \"java-springboot-basic\", \"app.kubernetes.io/part-of\": \"sample-app\", \"app.openshift.io/runtime\": \"spring-boot\"}",
-    "annotations": "{\"isFromDevfile\": \"true\", \"openshift.io/host.generated\": \"true\"}"
-  },
-  {
-    "name": "nodejs-basic",
-    "namespace": "test-ajpardos",
-    "type": "routes",
-    "created_at": "2024-07-10T21:54:20Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{\"app\": \"nodejs-basic\", \"app.kubernetes.io/component\": \"nodejs-basic\", \"app.kubernetes.io/instance\": \"nodejs-basic\", \"app.kubernetes.io/name\": \"nodejs-basic\", \"app.kubernetes.io/part-of\": \"sample-app\", \"app.openshift.io/runtime\": \"nodejs\"}",
-    "annotations": "{\"isFromDevfile\": \"true\", \"openshift.io/host.generated\": \"true\"}"
-  },
-  {
-    "name": "java-springboot-basic-1-ca",
-    "namespace": "test-ajpardos",
-    "type": "configmaps",
-    "created_at": "2024-07-10T15:39:20Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{}"
-  },
-  {
-    "name": "java-springboot-basic-1-global-ca",
-    "namespace": "test-ajpardos",
-    "type": "configmaps",
-    "created_at": "2024-07-10T15:39:20Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{}"
-  },
-  {
-    "name": "java-springboot-basic-1-sys-config",
-    "namespace": "test-ajpardos",
-    "type": "configmaps",
-    "created_at": "2024-07-10T15:39:20Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{}"
+    "type": "kubernetes.io/service-account-token"
   },
   {
     "name": "kube-root-ca.crt",
-    "namespace": "test-ajpardos",
-    "type": "configmaps",
-    "created_at": "2024-06-26T16:06:46Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"kubernetes.io/description\": \"Contains a CA bundle that can be used to verify the kube-apiserver when using internal endpoints such as the internal service IP or kubernetes.default.svc. No other usage is guaranteed across distributions of Kubernetes clusters.\"}"
-  },
-  {
-    "name": "nodejs-basic-1-ca",
-    "namespace": "test-ajpardos",
-    "type": "configmaps",
-    "created_at": "2024-07-10T21:54:21Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{}"
-  },
-  {
-    "name": "nodejs-basic-1-global-ca",
-    "namespace": "test-ajpardos",
-    "type": "configmaps",
-    "created_at": "2024-07-10T21:54:21Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{}"
-  },
-  {
-    "name": "nodejs-basic-1-sys-config",
-    "namespace": "test-ajpardos",
-    "type": "configmaps",
-    "created_at": "2024-07-10T21:54:21Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{}"
+    "data_keys": [
+      "ca.crt"
+    ]
   },
   {
     "name": "openshift-service-ca.crt",
+    "data_keys": [
+      "service-ca.crt"
+    ]
+  },
+  {
     "namespace": "test-ajpardos",
-    "type": "configmaps",
-    "created_at": "2024-06-26T16:06:46Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"service.beta.openshift.io/inject-cabundle\": \"true\"}"
+    "pod_name": "java-springboot-basic-1-build",
+    "node_name": "crc",
+    "resources": {},
+    "readiness_probe": {},
+    "liveness_probe": {},
+    "image": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46",
+    "pod_cpu_usage": "N/A",
+    "pod_memory_usage": "N/A"
+  },
+  {
+    "namespace": "test-ajpardos",
+    "pod_name": "java-springboot-basic-85df8f5bc9-fpb2v",
+    "node_name": "crc",
+    "resources": {
+      "requests": {
+        "cpu": "10m",
+        "memory": "180Mi"
+      }
+    },
+    "readiness_probe": {},
+    "liveness_probe": {},
+    "image": "image-registry.openshift-image-registry.svc:5000/test-ajpardos/java-springboot-basic:latest",
+    "pod_cpu_usage": "0m",
+    "pod_memory_usage": "172Mi"
+  },
+  {
+    "namespace": "test-ajpardos",
+    "pod_name": "nodejs-basic-1-build",
+    "node_name": "crc",
+    "resources": {},
+    "readiness_probe": {},
+    "liveness_probe": {},
+    "image": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46",
+    "pod_cpu_usage": "N/A",
+    "pod_memory_usage": "N/A"
+  },
+  {
+    "namespace": "test-ajpardos",
+    "pod_name": "nodejs-basic-6c866577f6-zf5zk",
+    "node_name": "crc",
+    "resources": {
+      "requests": {
+        "cpu": "10m",
+        "memory": "50Mi"
+      }
+    },
+    "readiness_probe": {},
+    "liveness_probe": {},
+    "image": "image-registry.openshift-image-registry.svc:5000/test-ajpardos/nodejs-basic:latest",
+    "pod_cpu_usage": "4m",
+    "pod_memory_usage": "60Mi"
   },
   {
     "name": "builder-dockercfg-cx9hw",
-    "namespace": "test-ajpardos",
-    "type": "secrets",
-    "created_at": "2024-06-26T16:06:47Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"kubernetes.io/service-account.name\": \"builder\", \"kubernetes.io/service-account.uid\": \"e460c6b5-2a3e-4ade-86f8-afae23009dc8\", \"openshift.io/token-secret.name\": \"builder-token-tsrt4\", \"openshift.io/token-secret.value\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Ik5WdGh6NXBCOEozdDh2eUNIdVhaSGZFWmxTN3VybUFFeHVJZFNkU2ZGWEEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJ0ZXN0LWFqcGFyZG9zIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImJ1aWxkZXItdG9rZW4tdHNydDQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiYnVpbGRlciIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImU0NjBjNmI1LTJhM2UtNGFkZS04NmY4LWFmYWUyMzAwOWRjOCIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDp0ZXN0LWFqcGFyZG9zOmJ1aWxkZXIifQ.D_C6Kf7btjzdRnnqCTjl8Lh93tW4UgoaPjf-7YkGg0wWMoNHMXcQJFlLEBuGtS185WL1dkPMhaz8HP0EIPpW5-TRSVoB2J1jubNmOxJMru-3T68WfyMjI0OMa7L2sW0-LRV2Y79aVAUU3HPosnSxvBZyyXm9gVQ4305xoF3ktw7Va3tOM4Q1qGIJTI-7siIBcYBdx3WOHAI4Ho-wsFd62Q5qecmSce2u6lRgdeb4CbW0J68HJLhzP6GgzVSYxqqBBYfOXZb2oQUGggvp1fhH_F1D6eTPEbZfENQwQoU-ffXnUneqiAhVXPSUjLpCM1zCI1iSZMq1zyzLq0RKpQ9Li69AOIZuFPJeYKnyuyn0KgajDYHUTG_RkKsQY_LqdkjzMUESxjtbw0vs4wwlD6TqF0CR3K_L6vg-Y3cRQ1eJ3206ckGAjH-JvkUCw2EnS18UeXMPEQo6KOviJcZoKiQd2qpW5GMd4T5pRoqVv2v6UdUfSxLcewZtg9lKO34pTjg7vfTASY89-y04E_S5H7D2V8JllFD25hBZ7XuA8TKfZb1PSiDZ2ZpI17ngwRFPd-RmyJ7JDQ7oQasCF9tMyVbl5RAR5xgzQC2o_8RwsJ_laRN25qysrJuVItTuhYjTQTkKdVJMG1Q-o44Txcc4q_W-ii9j-QhJsATlpI7db7oRJNg\"}"
+    "type": "kubernetes.io/dockercfg"
   },
   {
     "name": "builder-token-tsrt4",
-    "namespace": "test-ajpardos",
-    "type": "secrets",
-    "created_at": "2024-06-26T16:06:46Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{\"kubernetes.io/legacy-token-last-used\": \"2024-07-10\"}",
-    "annotations": "{\"kubernetes.io/created-by\": \"openshift.io/create-dockercfg-secrets\", \"kubernetes.io/service-account.name\": \"builder\", \"kubernetes.io/service-account.uid\": \"e460c6b5-2a3e-4ade-86f8-afae23009dc8\"}"
+    "type": "kubernetes.io/service-account-token"
   },
   {
     "name": "default-dockercfg-d8qxs",
-    "namespace": "test-ajpardos",
-    "type": "secrets",
-    "created_at": "2024-06-26T16:06:47Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"kubernetes.io/service-account.name\": \"default\", \"kubernetes.io/service-account.uid\": \"d7792bf1-3f91-462f-99c1-65a289b52597\", \"openshift.io/token-secret.name\": \"default-token-ccqj9\", \"openshift.io/token-secret.value\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Ik5WdGh6NXBCOEozdDh2eUNIdVhaSGZFWmxTN3VybUFFeHVJZFNkU2ZGWEEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJ0ZXN0LWFqcGFyZG9zIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlZmF1bHQtdG9rZW4tY2NxajkiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVmYXVsdCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImQ3NzkyYmYxLTNmOTEtNDYyZi05OWMxLTY1YTI4OWI1MjU5NyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDp0ZXN0LWFqcGFyZG9zOmRlZmF1bHQifQ.a6UgScmU6KNTQL6AEHRGGBP8nv4XBcIIpleQQSxAU_kekEYhpSMcV_ECyfErFelkXK97woPcG5yLx5sTnOhBrT9Dl4pkt6e4JmJogiiimmIAC_1HBPIh962Qqp9XJvnutBaxUQJddrZlyrb--or_J3ZFV8kNNptwuvI57eQZpHHRG8CAwG5xRRrqhluvXiyEYMjJ5gQxh_C-XdD2K8ELGia3MIdn40rmHbXy-SrnUWDfv8KZ8eWFPO3uwa8WNR8ty410FugiyPBcfQM0xApw1rrpkCWFoQe5By5c6OTQGXoZ__WJaKS-I_esdHssWoTHqFSojzM0rYNl6wOJs0rMvsjubVloM3PLjP0woCBkL-2JIwLvA6n0enH3tt8BAgR3mY_--D47TEAmM9OdmtHu-7DpocXvyVewQdRZPWyeFN3pop7iwVDGKchR8HqhCUpGGtAiH8R3cG79F8kzE0RdMGo6HcWncWCChp42vEwgasA5golvEigeJo9WhllbXDaIVy1K7AfBChtF6YtNOL5dd6YAD71csdBsqIGtJxGiwPsKI9tTEI8Xp4NHcBj-ULT0T6sVjnjF7ajcsTy6ZfHoinBBlbwziARm9s7_gSYOlt5IqhnReQ6kmlWKNmigGA2Ay_h16TWgoHzKz0jl9EIMq4ghdBlAWSGO96WmZhjHawU\"}"
+    "type": "kubernetes.io/dockercfg"
   },
   {
     "name": "default-token-ccqj9",
-    "namespace": "test-ajpardos",
-    "type": "secrets",
-    "created_at": "2024-06-26T16:06:46Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{\"kubernetes.io/legacy-token-last-used\": \"2024-08-13\"}",
-    "annotations": "{\"kubernetes.io/created-by\": \"openshift.io/create-dockercfg-secrets\", \"kubernetes.io/service-account.name\": \"default\", \"kubernetes.io/service-account.uid\": \"d7792bf1-3f91-462f-99c1-65a289b52597\"}"
+    "type": "kubernetes.io/service-account-token"
   },
   {
     "name": "deployer-dockercfg-5qrtl",
-    "namespace": "test-ajpardos",
-    "type": "secrets",
-    "created_at": "2024-06-26T16:06:46Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"kubernetes.io/service-account.name\": \"deployer\", \"kubernetes.io/service-account.uid\": \"e9bed810-c853-445a-85d1-e9ac89ea57de\", \"openshift.io/token-secret.name\": \"deployer-token-ngs9f\", \"openshift.io/token-secret.value\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Ik5WdGh6NXBCOEozdDh2eUNIdVhaSGZFWmxTN3VybUFFeHVJZFNkU2ZGWEEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJ0ZXN0LWFqcGFyZG9zIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlcGxveWVyLXRva2VuLW5nczlmIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImRlcGxveWVyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiZTliZWQ4MTAtYzg1My00NDVhLTg1ZDEtZTlhYzg5ZWE1N2RlIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OnRlc3QtYWpwYXJkb3M6ZGVwbG95ZXIifQ.VoytoKmWvX154REmbBwoGnttEXXZhkdpmgeyWXiZ6LfPx9VF4JTLMdXJj5js7g_dhCYkNbrkiNfRJSSc23s4HLv_aUYjJBeJ2OHf5TmozjNsEINGUw08kBRHTjQHzeB1uKtMU1na_A64ZTdsSyarWCHqg2OBHp4WYSBLKWoxns4rVe9Gh0q9odHPTKGH3ZMZZk6URrgbcsPfSMg0zTH89c5-mc6JQZWLqHUjJ0mz--nRNUHP5wbf0cKPD_S1haqgLGzAhQ56Jl_kY8rlqIdnJOawQw5Wy7ZeNTn9GIho74xY58qvvh2Cjhu12PZVzD9sKmIQOPv_hcniH34oJbqPMjxwKYRWLQ4uWSYJsU7-N1oJoHgBqPSMfyHqxbUVKF4kPfI13_IVTIwf5d6NQl5hS15iTUh7OQvEQovtB04QeoJZQ69xu_f3J-m7BCnY6vJVTZQGr1To3LJsd4DhVKersfoRetu7o1p6OalAyio_aUIbZe1-0hmwoTGwlwYFb6oYi4irKZIT3knXwA10IO4pB1FHOxFvmIdXW4ZTi1FTop7wcZP2Kt8ock1uGdYQ5urTLDrekJQMycAWZ6fDcwgx1J3qdRmifvaF9otsqmjABoyD9bJWKRBXOPtIEdps_H9xpxvzNSBxA5OHAKaB5CRTrei5lh1K0CJleI-IW7oT6p4\"}"
+    "type": "kubernetes.io/dockercfg"
   },
   {
     "name": "deployer-token-ngs9f",
-    "namespace": "test-ajpardos",
-    "type": "secrets",
-    "created_at": "2024-06-26T16:06:46Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{}",
-    "annotations": "{\"kubernetes.io/created-by\": \"openshift.io/create-dockercfg-secrets\", \"kubernetes.io/service-account.name\": \"deployer\", \"kubernetes.io/service-account.uid\": \"e9bed810-c853-445a-85d1-e9ac89ea57de\"}"
+    "type": "kubernetes.io/service-account-token"
   },
   {
     "name": "dotnet-sample-generic-webhook-secret",
-    "namespace": "test-ajpardos",
-    "type": "secrets",
-    "created_at": "2024-07-10T14:17:35Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{\"app\": \"dotnet-sample\", \"app.kubernetes.io/component\": \"dotnet-sample\", \"app.kubernetes.io/instance\": \"dotnet-sample\", \"app.kubernetes.io/name\": \"dotnet-sample\", \"app.kubernetes.io/part-of\": \"sample-app\", \"app.openshift.io/runtime\": \"dotnet\", \"app.openshift.io/runtime-version\": \"8.0-ubi8\"}",
-    "annotations": "{}"
+    "type": "Opaque"
   },
   {
     "name": "dotnet-sample-github-webhook-secret",
-    "namespace": "test-ajpardos",
-    "type": "secrets",
-    "created_at": "2024-07-10T14:17:35Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{\"app\": \"dotnet-sample\", \"app.kubernetes.io/component\": \"dotnet-sample\", \"app.kubernetes.io/instance\": \"dotnet-sample\", \"app.kubernetes.io/name\": \"dotnet-sample\", \"app.kubernetes.io/part-of\": \"sample-app\", \"app.openshift.io/runtime\": \"dotnet\", \"app.openshift.io/runtime-version\": \"8.0-ubi8\"}",
-    "annotations": "{}"
+    "type": "Opaque"
   },
   {
     "name": "java-springboot-basic-generic-webhook-secret",
-    "namespace": "test-ajpardos",
-    "type": "secrets",
-    "created_at": "2024-07-10T15:39:20Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{\"app\": \"java-springboot-basic\", \"app.kubernetes.io/component\": \"java-springboot-basic\", \"app.kubernetes.io/instance\": \"java-springboot-basic\", \"app.kubernetes.io/name\": \"java-springboot-basic\", \"app.kubernetes.io/part-of\": \"sample-app\", \"app.openshift.io/runtime\": \"java-springboot-basic\"}",
-    "annotations": "{}"
+    "type": "Opaque"
   },
   {
     "name": "nginx-sample-generic-webhook-secret",
-    "namespace": "test-ajpardos",
-    "type": "secrets",
-    "created_at": "2024-07-10T14:58:02Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{\"app\": \"nginx-sample\", \"app.kubernetes.io/component\": \"nginx-sample\", \"app.kubernetes.io/instance\": \"nginx-sample\", \"app.kubernetes.io/name\": \"nginx-sample\", \"app.kubernetes.io/part-of\": \"sample-app\", \"app.openshift.io/runtime\": \"nginx\", \"app.openshift.io/runtime-version\": \"latest\"}",
-    "annotations": "{}"
+    "type": "Opaque"
   },
   {
     "name": "nginx-sample-github-webhook-secret",
-    "namespace": "test-ajpardos",
-    "type": "secrets",
-    "created_at": "2024-07-10T14:58:02Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{\"app\": \"nginx-sample\", \"app.kubernetes.io/component\": \"nginx-sample\", \"app.kubernetes.io/instance\": \"nginx-sample\", \"app.kubernetes.io/name\": \"nginx-sample\", \"app.kubernetes.io/part-of\": \"sample-app\", \"app.openshift.io/runtime\": \"nginx\", \"app.openshift.io/runtime-version\": \"latest\"}",
-    "annotations": "{}"
+    "type": "Opaque"
   },
   {
     "name": "nodejs-basic-generic-webhook-secret",
-    "namespace": "test-ajpardos",
-    "type": "secrets",
-    "created_at": "2024-07-10T21:54:20Z",
-    "status": "N/A",
-    "selector": "{}",
-    "labels": "{\"app\": \"nodejs-basic\", \"app.kubernetes.io/component\": \"nodejs-basic\", \"app.kubernetes.io/instance\": \"nodejs-basic\", \"app.kubernetes.io/name\": \"nodejs-basic\", \"app.kubernetes.io/part-of\": \"sample-app\", \"app.openshift.io/runtime\": \"nodejs-basic\"}",
-    "annotations": "{}"
+    "type": "Opaque"
+  },
+  {
+    "name": "java-springboot-basic-1-ca",
+    "data_keys": [
+      "default-route-openshift-image-registry.apps-crc.testing",
+      "service-ca.crt"
+    ]
+  },
+  {
+    "name": "java-springboot-basic-1-global-ca",
+    "data_keys": [
+      "ca-bundle.crt"
+    ]
+  },
+  {
+    "name": "java-springboot-basic-1-sys-config",
+    "data_keys": []
+  },
+  {
+    "name": "kube-root-ca.crt",
+    "data_keys": [
+      "ca.crt"
+    ]
+  },
+  {
+    "name": "nodejs-basic-1-ca",
+    "data_keys": [
+      "default-route-openshift-image-registry.apps-crc.testing",
+      "service-ca.crt"
+    ]
+  },
+  {
+    "name": "nodejs-basic-1-global-ca",
+    "data_keys": [
+      "ca-bundle.crt"
+    ]
+  },
+  {
+    "name": "nodejs-basic-1-sys-config",
+    "data_keys": []
+  },
+  {
+    "name": "openshift-service-ca.crt",
+    "data_keys": [
+      "service-ca.crt"
+    ]
   }
 ]
