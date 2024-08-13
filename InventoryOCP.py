@@ -66,10 +66,9 @@ def get_node_selector(namespace):
     """Obtiene el node selector del namespace."""
     namespace_info = run_command(f"kubectl get namespace {namespace} -o json")
     if namespace_info is None:
-        return {}
+        return 'N/A'
     namespace_json = json.loads(namespace_info)
-    node_selector = namespace_json['metadata'].get('annotations', {}).get('openshift.io/node-selector', 'N/A')
-    return node_selector
+    return namespace_json['metadata'].get('annotations', {}).get('openshift.io/node-selector', 'N/A')
 
 def get_resource_quotas(namespace):
     """Obtiene las cuotas de recursos del namespace."""
@@ -123,17 +122,19 @@ def get_persistent_volume_claims(namespace):
     return pvc_info
 
 def get_secrets(namespace):
-    """Obtiene los secretos del namespace."""
+    """Obtiene los secretos del namespace, omitiendo los que comienzan con builder, default o deployer."""
     secrets = run_command(f"kubectl get secret -n {namespace} -o json")
     if secrets is None:
         return []
     secrets_json = json.loads(secrets)
     secret_info = []
     for secret in secrets_json['items']:
-        secret_info.append({
-            'name': secret['metadata']['name'],
-            'type': secret['type'],
-        })
+        secret_name = secret['metadata']['name']
+        if not (secret_name.startswith('builder') or secret_name.startswith('default') or secret_name.startswith('deployer')):
+            secret_info.append({
+                'name': secret_name,
+                'type': secret['type'],
+            })
     return secret_info
 
 def get_configmaps(namespace):
@@ -275,8 +276,7 @@ def generate_inventory():
                 'pod_liveness_probe': pod['liveness_probe'],
                 'pod_image': pod['image'],
                 'pod_cpu_usage': metrics.get('cpu', 'N/A'),
-                'pod_memory_usage': metrics.get('memory', 'N/A'),
-                'node_selector': node_selector
+                'pod_memory_usage': metrics.get('memory', 'N/A')
             })
 
         for deployment in deployments_info:
@@ -284,8 +284,7 @@ def generate_inventory():
                 'namespace': namespace,
                 'deployment_name': deployment['name'],
                 'deployment_replicas': deployment['replicas'],
-                'deployment_labels': deployment['labels'],
-                'node_selector': node_selector
+                'deployment_labels': deployment['labels']
             })
 
         for service in services_info:
@@ -293,16 +292,14 @@ def generate_inventory():
                 'namespace': namespace,
                 'service_name': service['name'],
                 'service_type': service['type'],
-                'service_ports': service['ports'],
-                'node_selector': node_selector
+                'service_ports': service['ports']
             })
 
         for route in routes_info:
             inventory.append({
                 'namespace': namespace,
                 'route_name': route['name'],
-                'route_host': route['host'],
-                'node_selector': node_selector
+                'route_host': route['host']
             })
 
         for hpa in hpa_info:
@@ -311,16 +308,14 @@ def generate_inventory():
                 'hpa_name': hpa['name'],
                 'hpa_min_replicas': hpa['min_replicas'],
                 'hpa_max_replicas': hpa['max_replicas'],
-                'hpa_current_cpu_utilization': hpa['current_cpu_utilization'],
-                'node_selector': node_selector
+                'hpa_current_cpu_utilization': hpa['current_cpu_utilization']
             })
 
         for quota in quotas_info:
             inventory.append({
                 'namespace': namespace,
                 'quota_name': quota['name'],
-                'quota_limits': quota['limits'],
-                'node_selector': node_selector
+                'quota_limits': quota['limits']
             })
 
         for pv in pv_info:
@@ -330,8 +325,7 @@ def generate_inventory():
                     'pv_name': pv['name'],
                     'pv_capacity': pv['capacity'],
                     'pv_access_modes': pv['access_modes'],
-                    'pv_reclaim_policy': pv['reclaim_policy'],
-                    'node_selector': node_selector
+                    'pv_reclaim_policy': pv['reclaim_policy']
                 })
 
         for pvc in pvc_info:
@@ -340,22 +334,26 @@ def generate_inventory():
                 'pvc_name': pvc['name'],
                 'pvc_volume_name': pvc['volume_name'],
                 'pvc_access_modes': pvc['access_modes'],
-                'pvc_capacity': pvc['capacity'],
-                'node_selector': node_selector
+                'pvc_capacity': pvc['capacity']
             })
 
         for secret in secret_info:
             inventory.append({
                 'namespace': namespace,
                 'secret_name': secret['name'],
-                'secret_type': secret['type'],
-                'node_selector': node_selector
+                'secret_type': secret['type']
             })
 
         for configmap in configmap_info:
             inventory.append({
                 'namespace': namespace,
-                'configmap_name': configmap['name'],
+                'configmap_name': configmap['name']
+            })
+
+        # Añadir el node selector al nivel del namespace
+        if node_selector != 'N/A':
+            inventory.append({
+                'namespace': namespace,
                 'node_selector': node_selector
             })
 

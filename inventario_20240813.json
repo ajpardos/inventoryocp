@@ -8,8 +8,7 @@
     "pod_liveness_probe": {},
     "pod_image": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46",
     "pod_cpu_usage": "N/A",
-    "pod_memory_usage": "N/A",
-    "node_selector": "N/A"
+    "pod_memory_usage": "N/A"
   },
   {
     "namespace": "hello-world",
@@ -20,8 +19,7 @@
     "pod_liveness_probe": {},
     "pod_image": "image-registry.openshift-image-registry.svc:5000/hello-world/hellogo@sha256:9367d485e8778b4ab07b6385de85afee1cd5a878a6ea3ad8d37233d111c157df",
     "pod_cpu_usage": "0m",
-    "pod_memory_usage": "11Mi",
-    "node_selector": "N/A"
+    "pod_memory_usage": "11Mi"
   },
   {
     "namespace": "hello-world",
@@ -31,8 +29,7 @@
       "app": "hellogo",
       "app.kubernetes.io/component": "hellogo",
       "app.kubernetes.io/instance": "hellogo"
-    },
-    "node_selector": "N/A"
+    }
   },
   {
     "namespace": "hello-world",
@@ -44,14 +41,12 @@
         "protocol": "TCP",
         "targetPort": 3000
       }
-    ],
-    "node_selector": "N/A"
+    ]
   },
   {
     "namespace": "hello-world",
     "route_name": "hellogo",
-    "route_host": "hellogo-hello-world.apps-crc.testing",
-    "node_selector": "N/A"
+    "route_host": "hellogo-hello-world.apps-crc.testing"
   },
   {
     "namespace": "hello-world",
@@ -62,115 +57,35 @@
       "pods": "14",
       "requests.cpu": "250m",
       "requests.memory": "107374182400m"
-    },
-    "node_selector": "N/A"
+    }
   },
   {
     "namespace": "hello-world",
-    "secret_name": "builder-dockercfg-cjmc2",
-    "secret_type": "kubernetes.io/dockercfg",
-    "node_selector": "N/A"
+    "configmap_name": "hellogo-1-ca"
   },
   {
     "namespace": "hello-world",
-    "secret_name": "builder-token-whtvr",
-    "secret_type": "kubernetes.io/service-account-token",
-    "node_selector": "N/A"
+    "configmap_name": "hellogo-1-global-ca"
   },
   {
     "namespace": "hello-world",
-    "secret_name": "default-dockercfg-9dcfn",
-    "secret_type": "kubernetes.io/dockercfg",
-    "node_selector": "N/A"
+    "configmap_name": "hellogo-1-sys-config"
   },
   {
     "namespace": "hello-world",
-    "secret_name": "default-token-bvhbb",
-    "secret_type": "kubernetes.io/service-account-token",
-    "node_selector": "N/A"
+    "configmap_name": "kube-root-ca.crt"
   },
   {
     "namespace": "hello-world",
-    "secret_name": "deployer-dockercfg-rhqzr",
-    "secret_type": "kubernetes.io/dockercfg",
-    "node_selector": "N/A"
-  },
-  {
-    "namespace": "hello-world",
-    "secret_name": "deployer-token-dp7mf",
-    "secret_type": "kubernetes.io/service-account-token",
-    "node_selector": "N/A"
-  },
-  {
-    "namespace": "hello-world",
-    "configmap_name": "hellogo-1-ca",
-    "node_selector": "N/A"
-  },
-  {
-    "namespace": "hello-world",
-    "configmap_name": "hellogo-1-global-ca",
-    "node_selector": "N/A"
-  },
-  {
-    "namespace": "hello-world",
-    "configmap_name": "hellogo-1-sys-config",
-    "node_selector": "N/A"
-  },
-  {
-    "namespace": "hello-world",
-    "configmap_name": "kube-root-ca.crt",
-    "node_selector": "N/A"
-  },
-  {
-    "namespace": "hello-world",
-    "configmap_name": "openshift-service-ca.crt",
-    "node_selector": "N/A"
+    "configmap_name": "openshift-service-ca.crt"
   },
   {
     "namespace": "openshift",
-    "secret_name": "builder-dockercfg-xgwqb",
-    "secret_type": "kubernetes.io/dockercfg",
-    "node_selector": "N/A"
+    "configmap_name": "kube-root-ca.crt"
   },
   {
     "namespace": "openshift",
-    "secret_name": "builder-token-cq5lf",
-    "secret_type": "kubernetes.io/service-account-token",
-    "node_selector": "N/A"
-  },
-  {
-    "namespace": "openshift",
-    "secret_name": "default-dockercfg-zbgk5",
-    "secret_type": "kubernetes.io/dockercfg",
-    "node_selector": "N/A"
-  },
-  {
-    "namespace": "openshift",
-    "secret_name": "default-token-pvvl2",
-    "secret_type": "kubernetes.io/service-account-token",
-    "node_selector": "N/A"
-  },
-  {
-    "namespace": "openshift",
-    "secret_name": "deployer-dockercfg-hd82l",
-    "secret_type": "kubernetes.io/dockercfg",
-    "node_selector": "N/A"
-  },
-  {
-    "namespace": "openshift",
-    "secret_name": "deployer-token-9vm8q",
-    "secret_type": "kubernetes.io/service-account-token",
-    "node_selector": "N/A"
-  },
-  {
-    "namespace": "openshift",
-    "configmap_name": "kube-root-ca.crt",
-    "node_selector": "N/A"
-  },
-  {
-    "namespace": "openshift",
-    "configmap_name": "openshift-service-ca.crt",
-    "node_selector": "N/A"
+    "configmap_name": "openshift-service-ca.crt"
   },
   {
     "namespace": "test-ajpardos",
@@ -181,8 +96,7 @@
     "pod_liveness_probe": {},
     "pod_image": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46",
     "pod_cpu_usage": "N/A",
-    "pod_memory_usage": "N/A",
-    "node_selector": "N/A"
+    "pod_memory_usage": "N/A"
   },
   {
     "namespace": "test-ajpardos",
@@ -198,8 +112,7 @@
     "pod_liveness_probe": {},
     "pod_image": "image-registry.openshift-image-registry.svc:5000/test-ajpardos/java-springboot-basic:latest",
     "pod_cpu_usage": "0m",
-    "pod_memory_usage": "172Mi",
-    "node_selector": "N/A"
+    "pod_memory_usage": "200Mi"
   },
   {
     "namespace": "test-ajpardos",
@@ -210,8 +123,7 @@
     "pod_liveness_probe": {},
     "pod_image": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46",
     "pod_cpu_usage": "N/A",
-    "pod_memory_usage": "N/A",
-    "node_selector": "N/A"
+    "pod_memory_usage": "N/A"
   },
   {
     "namespace": "test-ajpardos",
@@ -226,9 +138,8 @@
     "pod_readiness_probe": {},
     "pod_liveness_probe": {},
     "pod_image": "image-registry.openshift-image-registry.svc:5000/test-ajpardos/nodejs-basic:latest",
-    "pod_cpu_usage": "4m",
-    "pod_memory_usage": "60Mi",
-    "node_selector": "N/A"
+    "pod_cpu_usage": "3m",
+    "pod_memory_usage": "63Mi"
   },
   {
     "namespace": "test-ajpardos",
@@ -241,8 +152,7 @@
       "app.kubernetes.io/name": "java-springboot-basic",
       "app.kubernetes.io/part-of": "sample-app",
       "app.openshift.io/runtime": "spring-boot"
-    },
-    "node_selector": "N/A"
+    }
   },
   {
     "namespace": "test-ajpardos",
@@ -255,8 +165,7 @@
       "app.kubernetes.io/name": "nodejs-basic",
       "app.kubernetes.io/part-of": "sample-app",
       "app.openshift.io/runtime": "nodejs"
-    },
-    "node_selector": "N/A"
+    }
   },
   {
     "namespace": "test-ajpardos",
@@ -269,8 +178,7 @@
         "protocol": "TCP",
         "targetPort": 8081
       }
-    ],
-    "node_selector": "N/A"
+    ]
   },
   {
     "namespace": "test-ajpardos",
@@ -283,20 +191,17 @@
         "protocol": "TCP",
         "targetPort": 3001
       }
-    ],
-    "node_selector": "N/A"
+    ]
   },
   {
     "namespace": "test-ajpardos",
     "route_name": "java-springboot-basic",
-    "route_host": "java-springboot-basic-test-ajpardos.apps-crc.testing",
-    "node_selector": "N/A"
+    "route_host": "java-springboot-basic-test-ajpardos.apps-crc.testing"
   },
   {
     "namespace": "test-ajpardos",
     "route_name": "nodejs-basic",
-    "route_host": "nodejs-basic-test-ajpardos.apps-crc.testing",
-    "node_selector": "N/A"
+    "route_host": "nodejs-basic-test-ajpardos.apps-crc.testing"
   },
   {
     "namespace": "test-ajpardos",
@@ -307,119 +212,68 @@
       "pods": "4",
       "requests.cpu": "250m",
       "requests.memory": "107374182400m"
-    },
-    "node_selector": "N/A"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "secret_name": "builder-dockercfg-cx9hw",
-    "secret_type": "kubernetes.io/dockercfg",
-    "node_selector": "N/A"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "secret_name": "builder-token-tsrt4",
-    "secret_type": "kubernetes.io/service-account-token",
-    "node_selector": "N/A"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "secret_name": "default-dockercfg-d8qxs",
-    "secret_type": "kubernetes.io/dockercfg",
-    "node_selector": "N/A"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "secret_name": "default-token-ccqj9",
-    "secret_type": "kubernetes.io/service-account-token",
-    "node_selector": "N/A"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "secret_name": "deployer-dockercfg-5qrtl",
-    "secret_type": "kubernetes.io/dockercfg",
-    "node_selector": "N/A"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "secret_name": "deployer-token-ngs9f",
-    "secret_type": "kubernetes.io/service-account-token",
-    "node_selector": "N/A"
+    }
   },
   {
     "namespace": "test-ajpardos",
     "secret_name": "dotnet-sample-generic-webhook-secret",
-    "secret_type": "Opaque",
-    "node_selector": "N/A"
+    "secret_type": "Opaque"
   },
   {
     "namespace": "test-ajpardos",
     "secret_name": "dotnet-sample-github-webhook-secret",
-    "secret_type": "Opaque",
-    "node_selector": "N/A"
+    "secret_type": "Opaque"
   },
   {
     "namespace": "test-ajpardos",
     "secret_name": "java-springboot-basic-generic-webhook-secret",
-    "secret_type": "Opaque",
-    "node_selector": "N/A"
+    "secret_type": "Opaque"
   },
   {
     "namespace": "test-ajpardos",
     "secret_name": "nginx-sample-generic-webhook-secret",
-    "secret_type": "Opaque",
-    "node_selector": "N/A"
+    "secret_type": "Opaque"
   },
   {
     "namespace": "test-ajpardos",
     "secret_name": "nginx-sample-github-webhook-secret",
-    "secret_type": "Opaque",
-    "node_selector": "N/A"
+    "secret_type": "Opaque"
   },
   {
     "namespace": "test-ajpardos",
     "secret_name": "nodejs-basic-generic-webhook-secret",
-    "secret_type": "Opaque",
-    "node_selector": "N/A"
+    "secret_type": "Opaque"
   },
   {
     "namespace": "test-ajpardos",
-    "configmap_name": "java-springboot-basic-1-ca",
-    "node_selector": "N/A"
+    "configmap_name": "java-springboot-basic-1-ca"
   },
   {
     "namespace": "test-ajpardos",
-    "configmap_name": "java-springboot-basic-1-global-ca",
-    "node_selector": "N/A"
+    "configmap_name": "java-springboot-basic-1-global-ca"
   },
   {
     "namespace": "test-ajpardos",
-    "configmap_name": "java-springboot-basic-1-sys-config",
-    "node_selector": "N/A"
+    "configmap_name": "java-springboot-basic-1-sys-config"
   },
   {
     "namespace": "test-ajpardos",
-    "configmap_name": "kube-root-ca.crt",
-    "node_selector": "N/A"
+    "configmap_name": "kube-root-ca.crt"
   },
   {
     "namespace": "test-ajpardos",
-    "configmap_name": "nodejs-basic-1-ca",
-    "node_selector": "N/A"
+    "configmap_name": "nodejs-basic-1-ca"
   },
   {
     "namespace": "test-ajpardos",
-    "configmap_name": "nodejs-basic-1-global-ca",
-    "node_selector": "N/A"
+    "configmap_name": "nodejs-basic-1-global-ca"
   },
   {
     "namespace": "test-ajpardos",
-    "configmap_name": "nodejs-basic-1-sys-config",
-    "node_selector": "N/A"
+    "configmap_name": "nodejs-basic-1-sys-config"
   },
   {
     "namespace": "test-ajpardos",
-    "configmap_name": "openshift-service-ca.crt",
-    "node_selector": "N/A"
+    "configmap_name": "openshift-service-ca.crt"
   }
 ]
