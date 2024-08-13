@@ -37,120 +37,39 @@ def get_non_openshift_namespaces():
     ]
     return non_excluded_namespaces
 
-def get_pod_info(namespace):
-    """Obtiene información de los pods en un namespace."""
-    pods = run_command(f"kubectl get pods -n {namespace} -o json")
-    if pods is None:
+def get_resources(namespace, resource_type):
+    """General function to fetch resources from OpenShift."""
+    resources = run_command(f"kubectl get {resource_type} -n {namespace} -o json")
+    if resources is None:
         return []
-    pod_info = []
+    return json.loads(resources)['items']
 
-    pods_json = json.loads(pods)
-    for pod in pods_json['items']:
-        pod_name = pod['metadata']['name']
-        node_name = pod['spec'].get('nodeName', 'N/A')
-        labels = pod['metadata'].get('labels', {})
-        resources = pod['spec']['containers'][0].get('resources', {})
-        readiness_probe = pod['spec']['containers'][0].get('readinessProbe', {})
-        liveness_probe = pod['spec']['containers'][0].get('livenessProbe', {})
-        image = pod['spec']['containers'][0]['image']
-        pod_info.append({
-            'name': pod_name,
-            'node_name': node_name,
-            'labels': labels,
-            'resources': resources,
-            'readiness_probe': readiness_probe,
-            'liveness_probe': liveness_probe,
-            'image': image
-        })
-    return pod_info
-
-def get_persistent_volumes(namespace):
-    """Obtiene los volúmenes persistentes del namespace."""
-    pvs = run_command("kubectl get pv -o json")
-    if pvs is None:
-        return []
-    pvs_json = json.loads(pvs)
-    pv_info = []
-    for pv in pvs_json['items']:
-        claim_ref = pv['spec'].get('claimRef')
-        if claim_ref and claim_ref.get('namespace') == namespace:
-            pv_info.append({
-                'name': pv['metadata']['name'],
-                'capacity': pv['spec']['capacity']['storage'],
-                'access_modes': pv['spec']['accessModes'],
-                'reclaim_policy': pv['spec']['persistentVolumeReclaimPolicy'],
-            })
-    return pv_info
-
-def get_persistent_volume_claims(namespace):
-    """Obtiene las reclamaciones de volúmenes persistentes del namespace."""
-    pvcs = run_command(f"kubectl get pvc -n {namespace} -o json")
-    if pvcs is None:
-        return []
-    pvcs_json = json.loads(pvcs)
-    pvc_info = []
-    for pvc in pvcs_json['items']:
-        pvc_info.append({
-            'name': pvc['metadata']['name'],
-            'volume_name': pvc['spec']['volumeName'],
-            'access_modes': pvc['status']['accessModes'],
-            'capacity': pvc['status']['capacity']['storage'],
-        })
-    return pvc_info
-
-def get_secrets(namespace):
-    """Obtiene los secretos del namespace."""
-    secrets = run_command(f"kubectl get secret -n {namespace} -o json")
-    if secrets is None:
-        return []
-    secrets_json = json.loads(secrets)
-    secret_info = []
-    for secret in secrets_json['items']:
-        secret_info.append({
-            'name': secret['metadata']['name'],
-            'type': secret['type'],
-        })
-    return secret_info
-
-def get_configmaps(namespace):
-    """Obtiene los configmaps del namespace."""
-    configmaps = run_command(f"kubectl get configmap -n {namespace} -o json")
-    if configmaps is None:
-        return []
-    configmaps_json = json.loads(configmaps)
-    configmap_info = []
-    for configmap in configmaps_json['items']:
-        data_keys = list(configmap.get('data', {}).keys())
-        configmap_info.append({
-            'name': configmap['metadata']['name'],
-            'data_keys': data_keys,
-        })
-    return configmap_info
-
-# Similar functions for other resources would go here...
+def standardize_inventory_data(data_list, standard_fields):
+    """Ensure that each dictionary in data_list contains all the fields in standard_fields, filling missing ones with None."""
+    return [{field: item.get(field, None) for field in standard_fields} for item in data_list]
 
 def generate_inventory():
     """Genera un inventario de los microservicios y lo guarda en archivos CSV y JSON."""
     inventory = []
-
     namespaces = get_non_openshift_namespaces()
+    resource_types = ['pods', 'services', 'deployments', 'routes', 'configmaps', 'secrets', 'persistentvolumeclaims']
+
     for namespace in namespaces:
         print(f"Processing namespace: {namespace}")
-        pod_info = get_pod_info(namespace)
-        pv_info = get_persistent_volumes(namespace)
-        pvc_info = get_persistent_volume_claims(namespace)
-        secret_info = get_secrets(namespace)
-        configmap_info = get_configmaps(namespace)
-        # Add other resources to inventory as needed...
+        for resource_type in resource_types:
+            resources_info = get_resources(namespace, resource_type)
+            for resource in resources_info:
+                resource.update({'type': resource_type, 'namespace': namespace})  # Add type and namespace to each resource
+                inventory.append(resource)
 
-        # Append all collected data to the inventory list
-        inventory.extend(pod_info + pv_info + pvc_info + secret_info + configmap_info)
-        # More appends as necessary...
+    # Determining all possible fields
+    fieldnames = set()
+    for item in inventory:
+        fieldnames.update(item.keys())
 
     # Save to CSV and JSON, including timestamp in filenames
     date_str = datetime.datetime.now().strftime("%Y%m%d")
     with open(f'inventario_{date_str}.csv', 'w', newline='') as csvfile:
-        fieldnames = list(inventory[0].keys()) if inventory else []
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         for item in inventory:
