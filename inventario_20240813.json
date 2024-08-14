@@ -2,54 +2,22 @@
   {
     "namespace": "hello-world",
     "deployment_name": "hellogo",
-    "node_name": "crc",
-    "pod_resources": {},
-    "pod_readiness_probe": {},
-    "pod_liveness_probe": {},
-    "pod_image": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46",
-    "pod_cpu_usage": "N/A",
-    "pod_memory_usage": "N/A"
-  },
-  {
-    "namespace": "hello-world",
-    "deployment_name": "hellogo",
-    "node_name": "crc",
-    "pod_resources": {},
-    "pod_readiness_probe": {},
-    "pod_liveness_probe": {},
-    "pod_image": "image-registry.openshift-image-registry.svc:5000/hello-world/hellogo@sha256:9367d485e8778b4ab07b6385de85afee1cd5a878a6ea3ad8d37233d111c157df",
-    "pod_cpu_usage": "0m",
-    "pod_memory_usage": "11Mi"
-  },
-  {
-    "namespace": "hello-world",
-    "deployment_name": "hellogo",
     "deployment_replicas": 1,
     "deployment_labels": {
       "app": "hellogo",
       "app.kubernetes.io/component": "hellogo",
       "app.kubernetes.io/instance": "hellogo"
-    }
-  },
-  {
-    "namespace": "hello-world",
-    "service_name": "hellogo",
-    "service_type": "ClusterIP",
-    "service_ports": [
-      {
-        "port": 3000,
-        "protocol": "TCP",
-        "targetPort": 3000
-      }
-    ]
-  },
-  {
-    "namespace": "hello-world",
-    "route_name": "hellogo",
-    "route_host": "hellogo-hello-world.apps-crc.testing"
-  },
-  {
-    "namespace": "hello-world",
+    },
+    "node_names": "crc",
+    "pod_images": "image-registry.openshift-image-registry.svc:5000/hello-world/hellogo@sha256:9367d485e8778b4ab07b6385de85afee1cd5a878a6ea3ad8d37233d111c157df,quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46",
+    "pod_resources": "{},{}",
+    "pod_cpu_usages": "N/A,0m",
+    "pod_memory_usages": "N/A,11Mi",
+    "services": "hellogo",
+    "service_ports": "3000",
+    "routes": "hellogo",
+    "route_hosts": "hellogo-hello-world.apps-crc.testing",
+    "hpas": "",
     "quota_name": "hello-world",
     "quota_limits": {
       "limits.cpu": "500m",
@@ -57,46 +25,8 @@
       "pods": "14",
       "requests.cpu": "250m",
       "requests.memory": "107374182400m"
-    }
-  },
-  {
-    "namespace": "hello-world",
-    "configmap_name": "hellogo-1-ca"
-  },
-  {
-    "namespace": "hello-world",
-    "configmap_name": "hellogo-1-global-ca"
-  },
-  {
-    "namespace": "hello-world",
-    "configmap_name": "hellogo-1-sys-config"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "deployment_name": "java-springboot-basic",
-    "node_name": "crc",
-    "pod_resources": {},
-    "pod_readiness_probe": {},
-    "pod_liveness_probe": {},
-    "pod_image": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46",
-    "pod_cpu_usage": "N/A",
-    "pod_memory_usage": "N/A"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "deployment_name": "java-springboot-basic",
-    "node_name": "crc",
-    "pod_resources": {
-      "requests": {
-        "cpu": "10m",
-        "memory": "180Mi"
-      }
     },
-    "pod_readiness_probe": {},
-    "pod_liveness_probe": {},
-    "pod_image": "image-registry.openshift-image-registry.svc:5000/test-ajpardos/java-springboot-basic:latest",
-    "pod_cpu_usage": "0m",
-    "pod_memory_usage": "198Mi"
+    "configmap_name": "hellogo-1-sys-config"
   },
   {
     "namespace": "test-ajpardos",
@@ -109,34 +39,17 @@
       "app.kubernetes.io/name": "java-springboot-basic",
       "app.kubernetes.io/part-of": "sample-app",
       "app.openshift.io/runtime": "spring-boot"
-    }
-  },
-  {
-    "namespace": "test-ajpardos",
-    "deployment_name": "nodejs-basic",
-    "node_name": "crc",
-    "pod_resources": {},
-    "pod_readiness_probe": {},
-    "pod_liveness_probe": {},
-    "pod_image": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46",
-    "pod_cpu_usage": "N/A",
-    "pod_memory_usage": "N/A"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "deployment_name": "nodejs-basic",
-    "node_name": "crc",
-    "pod_resources": {
-      "requests": {
-        "cpu": "10m",
-        "memory": "50Mi"
-      }
     },
-    "pod_readiness_probe": {},
-    "pod_liveness_probe": {},
-    "pod_image": "image-registry.openshift-image-registry.svc:5000/test-ajpardos/nodejs-basic:latest",
-    "pod_cpu_usage": "3m",
-    "pod_memory_usage": "63Mi"
+    "node_names": "crc",
+    "pod_images": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46,image-registry.openshift-image-registry.svc:5000/test-ajpardos/java-springboot-basic:latest",
+    "pod_resources": "{},{'requests': {'cpu': '10m', 'memory': '180Mi'}}",
+    "pod_cpu_usages": "N/A,0m",
+    "pod_memory_usages": "N/A,199Mi",
+    "services": "java-springboot-basic,nodejs-basic",
+    "service_ports": "8081,3001",
+    "routes": "java-springboot-basic,nodejs-basic",
+    "route_hosts": "java-springboot-basic-test-ajpardos.apps-crc.testing,nodejs-basic-test-ajpardos.apps-crc.testing",
+    "hpas": ""
   },
   {
     "namespace": "test-ajpardos",
@@ -149,46 +62,17 @@
       "app.kubernetes.io/name": "nodejs-basic",
       "app.kubernetes.io/part-of": "sample-app",
       "app.openshift.io/runtime": "nodejs"
-    }
-  },
-  {
-    "namespace": "test-ajpardos",
-    "service_name": "java-springboot-basic",
-    "service_type": "ClusterIP",
-    "service_ports": [
-      {
-        "name": "http-8081",
-        "port": 8081,
-        "protocol": "TCP",
-        "targetPort": 8081
-      }
-    ]
-  },
-  {
-    "namespace": "test-ajpardos",
-    "service_name": "nodejs-basic",
-    "service_type": "ClusterIP",
-    "service_ports": [
-      {
-        "name": "http-3001",
-        "port": 3001,
-        "protocol": "TCP",
-        "targetPort": 3001
-      }
-    ]
-  },
-  {
-    "namespace": "test-ajpardos",
-    "route_name": "java-springboot-basic",
-    "route_host": "java-springboot-basic-test-ajpardos.apps-crc.testing"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "route_name": "nodejs-basic",
-    "route_host": "nodejs-basic-test-ajpardos.apps-crc.testing"
-  },
-  {
-    "namespace": "test-ajpardos",
+    },
+    "node_names": "crc",
+    "pod_images": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46,image-registry.openshift-image-registry.svc:5000/test-ajpardos/nodejs-basic:latest",
+    "pod_resources": "{},{'requests': {'cpu': '10m', 'memory': '50Mi'}}",
+    "pod_cpu_usages": "N/A,3m",
+    "pod_memory_usages": "N/A,64Mi",
+    "services": "java-springboot-basic,nodejs-basic",
+    "service_ports": "8081,3001",
+    "routes": "java-springboot-basic,nodejs-basic",
+    "route_hosts": "java-springboot-basic-test-ajpardos.apps-crc.testing,nodejs-basic-test-ajpardos.apps-crc.testing",
+    "hpas": "",
     "quota_name": "test-ajpardos",
     "quota_limits": {
       "limits.cpu": "500m",
@@ -196,64 +80,10 @@
       "pods": "4",
       "requests.cpu": "250m",
       "requests.memory": "107374182400m"
-    }
-  },
-  {
-    "namespace": "test-ajpardos",
-    "secret_name": "dotnet-sample-generic-webhook-secret",
-    "secret_type": "Opaque"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "secret_name": "dotnet-sample-github-webhook-secret",
-    "secret_type": "Opaque"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "secret_name": "java-springboot-basic-generic-webhook-secret",
-    "secret_type": "Opaque"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "secret_name": "nginx-sample-generic-webhook-secret",
-    "secret_type": "Opaque"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "secret_name": "nginx-sample-github-webhook-secret",
-    "secret_type": "Opaque"
-  },
-  {
-    "namespace": "test-ajpardos",
+    },
     "secret_name": "nodejs-basic-generic-webhook-secret",
-    "secret_type": "Opaque"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "configmap_name": "java-springboot-basic-1-ca"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "configmap_name": "java-springboot-basic-1-global-ca"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "configmap_name": "java-springboot-basic-1-sys-config"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "configmap_name": "nodejs-basic-1-ca"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "configmap_name": "nodejs-basic-1-global-ca"
-  },
-  {
-    "namespace": "test-ajpardos",
-    "configmap_name": "nodejs-basic-1-sys-config"
-  },
-  {
-    "namespace": "test-ajpardos",
+    "secret_type": "Opaque",
+    "configmap_name": "nodejs-basic-1-sys-config",
     "node_selector": "crc"
   }
 ]

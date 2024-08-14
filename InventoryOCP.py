@@ -201,7 +201,7 @@ def get_services_info(namespace):
         service_info.append({
             'name': service_name,
             'type': service_type,
-            'ports': ports
+            'ports': ','.join([str(port['port']) for port in ports])
         })
     return service_info
 
@@ -252,14 +252,12 @@ def generate_inventory():
     namespaces = get_non_openshift_namespaces()
     for namespace in namespaces:
         print(f"Processing namespace: {namespace}")
+        deployments_info = get_deployments_info(namespace)
         pod_info = get_pod_info(namespace)
         pod_metrics = get_pod_metrics(namespace)
-        deployments_info = get_deployments_info(namespace)
         services_info = get_services_info(namespace)
         routes_info = get_routes_info(namespace)
         hpa_info = get_hpa_info(namespace)
-        node_selector = get_node_selector(namespace)
-        quotas_info = get_resource_quotas(namespace)
         pvc_info = get_persistent_volume_claims(namespace)
         secret_info = get_secrets(namespace)
         configmap_info = get_configmaps(namespace)
@@ -268,63 +266,46 @@ def generate_inventory():
             deployment_name = deployment['deployment_name']
             relevant_pods = [pod for pod in pod_info if deployment_name in pod['pod_name']]
             
-            for pod in relevant_pods:
-                node_name = pod['node_name']
-                metrics = pod_metrics.get(pod['pod_name'], {})
-                inventory.append({
-                    'namespace': namespace,
-                    'deployment_name': deployment_name,
-                    'node_name': node_name,
-                    'pod_resources': pod['resources'],
-                    'pod_readiness_probe': pod['readiness_probe'],
-                    'pod_liveness_probe': pod['liveness_probe'],
-                    'pod_image': pod['image'],
-                    'pod_cpu_usage': metrics.get('cpu', 'N/A'),
-                    'pod_memory_usage': metrics.get('memory', 'N/A')
-                })
+            # Consolidar la información relacionada con el deployment
+            node_names = ','.join(set([pod['node_name'] for pod in relevant_pods]))
+            pod_images = ','.join(set([pod['image'] for pod in relevant_pods]))
+            pod_resources = ','.join([str(pod['resources']) for pod in relevant_pods])
+            pod_cpu_usages = ','.join([pod_metrics.get(pod['pod_name'], {}).get('cpu', 'N/A') for pod in relevant_pods])
+            pod_memory_usages = ','.join([pod_metrics.get(pod['pod_name'], {}).get('memory', 'N/A') for pod in relevant_pods])
+
+            services = ','.join([service['name'] for service in services_info])
+            service_ports = ','.join([service['ports'] for service in services_info])
+            routes = ','.join([route['name'] for route in routes_info])
+            route_hosts = ','.join([route['host'] for route in routes_info])
+            hpas = ','.join([hpa['name'] for hpa in hpa_info])
 
             inventory.append({
                 'namespace': namespace,
                 'deployment_name': deployment_name,
                 'deployment_replicas': deployment['replicas'],
-                'deployment_labels': deployment['labels']
+                'deployment_labels': deployment['labels'],
+                'node_names': node_names,
+                'pod_images': pod_images,
+                'pod_resources': pod_resources,
+                'pod_cpu_usages': pod_cpu_usages,
+                'pod_memory_usages': pod_memory_usages,
+                'services': services,
+                'service_ports': service_ports,
+                'routes': routes,
+                'route_hosts': route_hosts,
+                'hpas': hpas,
             })
 
-        for service in services_info:
-            inventory.append({
-                'namespace': namespace,
-                'service_name': service['name'],
-                'service_type': service['type'],
-                'service_ports': service['ports']
-            })
-
-        for route in routes_info:
-            inventory.append({
-                'namespace': namespace,
-                'route_name': route['name'],
-                'route_host': route['host']
-            })
-
-        for hpa in hpa_info:
-            inventory.append({
-                'namespace': namespace,
-                'hpa_name': hpa['name'],
-                'hpa_min_replicas': hpa['min_replicas'],
-                'hpa_max_replicas': hpa['max_replicas'],
-                'hpa_current_cpu_utilization': hpa['current_cpu_utilization']
-            })
-
-        for quota in quotas_info:
-            inventory.append({
-                'namespace': namespace,
+        # Opcional: añadir otros recursos al inventario, pero agrupados por deployment
+        for quota in get_resource_quotas(namespace):
+            inventory[-1].update({
                 'quota_name': quota['name'],
                 'quota_limits': quota['limits']
             })
 
         for pv in pv_info:
             if pv['namespace'] == namespace:
-                inventory.append({
-                    'namespace': namespace,
+                inventory[-1].update({
                     'pv_name': pv['name'],
                     'pv_capacity': pv['capacity'],
                     'pv_access_modes': pv['access_modes'],
@@ -332,8 +313,7 @@ def generate_inventory():
                 })
 
         for pvc in pvc_info:
-            inventory.append({
-                'namespace': namespace,
+            inventory[-1].update({
                 'pvc_name': pvc['name'],
                 'pvc_volume_name': pvc['volume_name'],
                 'pvc_access_modes': pvc['access_modes'],
@@ -341,24 +321,19 @@ def generate_inventory():
             })
 
         for secret in secret_info:
-            inventory.append({
-                'namespace': namespace,
+            inventory[-1].update({
                 'secret_name': secret['name'],
                 'secret_type': secret['type']
             })
 
         for configmap in configmap_info:
-            inventory.append({
-                'namespace': namespace,
+            inventory[-1].update({
                 'configmap_name': configmap['name']
             })
 
-        # Añadir el node selector al nivel del namespace
+        node_selector = get_node_selector(namespace)
         if node_selector != 'N/A':
-            inventory.append({
-                'namespace': namespace,
-                'node_selector': node_selector
-            })
+            inventory[-1].update({'node_selector': node_selector})
 
     # Obtener la fecha actual para usarla en el nombre de los archivos
     date_str = datetime.datetime.now().strftime("%Y%m%d")
@@ -366,10 +341,9 @@ def generate_inventory():
     # Guardar el inventario en un archivo CSV
     with open(f'inventario_{date_str}.csv', 'w', newline='') as csvfile:
         fieldnames = [
-            'namespace', 'node_name', 'pod_resources', 'pod_readiness_probe', 'pod_liveness_probe',
-            'pod_image', 'pod_cpu_usage', 'pod_memory_usage', 'deployment_name', 'deployment_replicas', 'deployment_labels',
-            'service_name', 'service_type', 'service_ports', 'route_name', 'route_host',
-            'hpa_name', 'hpa_min_replicas', 'hpa_max_replicas', 'hpa_current_cpu_utilization',
+            'namespace', 'deployment_name', 'deployment_replicas', 'deployment_labels',
+            'node_names', 'pod_images', 'pod_resources', 'pod_cpu_usages', 'pod_memory_usages',
+            'services', 'service_ports', 'routes', 'route_hosts', 'hpas',
             'quota_name', 'quota_limits', 'pv_name', 'pv_capacity', 'pv_access_modes', 'pv_reclaim_policy',
             'pvc_name', 'pvc_volume_name', 'pvc_access_modes', 'pvc_capacity',
             'secret_name', 'secret_type', 'configmap_name', 'node_selector'
