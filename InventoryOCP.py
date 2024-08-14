@@ -112,12 +112,21 @@ def get_persistent_volume_claims(namespace):
     pvcs_json = json.loads(pvcs)
     pvc_info = []
     for pvc in pvcs_json['items']:
-        pvc_info.append({
-            'name': pvc['metadata']['name'],
-            'volume_name': pvc['spec']['volumeName'],
-            'access_modes': pvc['status']['accessModes'],
-            'capacity': pvc['status']['capacity']['storage'],
-        })
+        try:
+            pvc_info.append({
+                'name': pvc['metadata']['name'],
+                'volume_name': pvc['spec'].get('volumeName', 'N/A'),
+                'access_modes': pvc['status'].get('accessModes', 'N/A'),
+                'capacity': pvc['status'].get('capacity', {}).get('storage', 'N/A'),
+            })
+        except KeyError as e:
+            print(f"Error accediendo a un campo en el PVC {pvc['metadata']['name']}: {e}")
+            pvc_info.append({
+                'name': pvc['metadata']['name'],
+                'volume_name': 'N/A',
+                'access_modes': 'N/A',
+                'capacity': 'N/A',
+            })
     return pvc_info
 
 def get_secrets(namespace):
@@ -153,19 +162,24 @@ def get_configmaps(namespace):
 
 def get_pod_metrics(namespace):
     """Obtiene métricas de los pods en un namespace."""
-    metrics_output = run_command(f"kubectl top pod -n {namespace} --no-headers")
-    if not metrics_output:
-        return {}
-    
-    pod_metrics = {}
-    for line in metrics_output.splitlines():
-        parts = line.split()
-        pod_name = parts[0]
-        cpu = parts[1]
-        memory = parts[2]
-        pod_metrics[pod_name] = {'cpu': cpu, 'memory': memory}
+    try:
+        metrics_output = run_command(f"kubectl top pod -n {namespace} --no-headers")
+        if metrics_output is None:
+            print(f"Métricas no disponibles para los pods en el namespace {namespace}.")
+            return {}
+        
+        pod_metrics = {}
+        for line in metrics_output.splitlines():
+            parts = line.split()
+            pod_name = parts[0]
+            cpu = parts[1]
+            memory = parts[2]
+            pod_metrics[pod_name] = {'cpu': cpu, 'memory': memory}
 
-    return pod_metrics
+        return pod_metrics
+    except Exception as e:
+        print(f"Error obteniendo métricas para el namespace {namespace}: {e}")
+        return {}
 
 def get_deployments_info(namespace):
     """Obtiene información de los despliegues en un namespace."""
@@ -185,6 +199,46 @@ def get_deployments_info(namespace):
             'labels': labels
         })
     return deployment_info
+
+def get_deploymentconfigs_info(namespace):
+    """Obtiene información de los DeploymentConfigs en un namespace."""
+    dcs = run_command(f"oc get deploymentconfig -n {namespace} -o json")
+    if dcs is None:
+        return []
+    dc_info = []
+
+    dcs_json = json.loads(dcs)
+    for dc in dcs_json['items']:
+        dc_name = dc['metadata']['name']
+        replicas = dc['spec']['replicas']
+        labels = dc['metadata'].get('labels', {})
+        dc_info.append({
+            'deployment_name': dc_name,
+            'replicas': replicas,
+            'labels': labels,
+            'type': 'DeploymentConfig'
+        })
+    return dc_info
+
+def get_statefulsets_info(namespace):
+    """Obtiene información de los StatefulSets en un namespace."""
+    statefulsets = run_command(f"kubectl get statefulsets -n {namespace} -o json")
+    if statefulsets is None:
+        return []
+    statefulset_info = []
+
+    statefulsets_json = json.loads(statefulsets)
+    for statefulset in statefulsets_json['items']:
+        ss_name = statefulset['metadata']['name']
+        replicas = statefulset['spec']['replicas']
+        labels = statefulset['metadata'].get('labels', {})
+        statefulset_info.append({
+            'deployment_name': ss_name,
+            'replicas': replicas,
+            'labels': labels,
+            'type': 'StatefulSet'
+        })
+    return statefulset_info
 
 def get_services_info(namespace):
     """Obtiene información de los servicios en un namespace."""
@@ -253,6 +307,8 @@ def generate_inventory():
     for namespace in namespaces:
         print(f"Processing namespace: {namespace}")
         deployments_info = get_deployments_info(namespace)
+        dcs_info = get_deploymentconfigs_info(namespace)
+        statefulsets_info = get_statefulsets_info(namespace)
         pod_info = get_pod_info(namespace)
         pod_metrics = get_pod_metrics(namespace)
         services_info = get_services_info(namespace)
@@ -262,11 +318,14 @@ def generate_inventory():
         secret_info = get_secrets(namespace)
         configmap_info = get_configmaps(namespace)
         
-        for deployment in deployments_info:
+        all_deployments_info = deployments_info + dcs_info + statefulsets_info
+        
+        for deployment in all_deployments_info:
             deployment_name = deployment['deployment_name']
+            deployment_type = deployment.get('type', 'Deployment')
             relevant_pods = [pod for pod in pod_info if deployment_name in pod['pod_name']]
             
-            # Consolidar la información relacionada con el deployment
+            # Consolidar la información relacionada con el deployment, DeploymentConfig o StatefulSet
             node_names = ','.join(set([pod['node_name'] for pod in relevant_pods]))
             pod_images = ','.join(set([pod['image'] for pod in relevant_pods]))
             pod_resources = ','.join([str(pod['resources']) for pod in relevant_pods])
@@ -282,6 +341,7 @@ def generate_inventory():
             inventory.append({
                 'namespace': namespace,
                 'deployment_name': deployment_name,
+                'deployment_type': deployment_type,
                 'deployment_replicas': deployment['replicas'],
                 'deployment_labels': deployment['labels'],
                 'node_names': node_names,
@@ -341,7 +401,7 @@ def generate_inventory():
     # Guardar el inventario en un archivo CSV
     with open(f'inventario_{date_str}.csv', 'w', newline='') as csvfile:
         fieldnames = [
-            'namespace', 'deployment_name', 'deployment_replicas', 'deployment_labels',
+            'namespace', 'deployment_name', 'deployment_type', 'deployment_replicas', 'deployment_labels',
             'node_names', 'pod_images', 'pod_resources', 'pod_cpu_usages', 'pod_memory_usages',
             'services', 'service_ports', 'routes', 'route_hosts', 'hpas',
             'quota_name', 'quota_limits', 'pv_name', 'pv_capacity', 'pv_access_modes', 'pv_reclaim_policy',
