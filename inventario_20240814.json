@@ -10,7 +10,7 @@
       "app.kubernetes.io/instance": "hellogo"
     },
     "node_names": "crc",
-    "pod_images": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46,image-registry.openshift-image-registry.svc:5000/hello-world/hellogo@sha256:9367d485e8778b4ab07b6385de85afee1cd5a878a6ea3ad8d37233d111c157df",
+    "pod_images": "image-registry.openshift-image-registry.svc:5000/hello-world/hellogo@sha256:9367d485e8778b4ab07b6385de85afee1cd5a878a6ea3ad8d37233d111c157df,quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46",
     "pod_resources": "{},{}",
     "pod_cpu_usages": "N/A,0m",
     "pod_memory_usages": "N/A,9Mi",
@@ -46,7 +46,7 @@
     "pod_images": "image-registry.openshift-image-registry.svc:5000/test-ajpardos/java-springboot-basic:latest,quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97b3e5992ac093e70233b62ae8e821d765f0fc504ad154ea69cf2c7c18455f46",
     "pod_resources": "{},{'requests': {'cpu': '10m', 'memory': '180Mi'}}",
     "pod_cpu_usages": "N/A,0m",
-    "pod_memory_usages": "N/A,193Mi",
+    "pod_memory_usages": "N/A,192Mi",
     "services": "java-springboot-basic,nodejs-basic",
     "service_ports": "8081,3001",
     "routes": "java-springboot-basic,nodejs-basic",
@@ -128,7 +128,8 @@
     "pvc_capacity": "N/A",
     "secret_name": "test-secret-1",
     "secret_type": "Opaque",
-    "configmap_name": "test-configmap-1"
+    "configmap_name": "test-configmap-1",
+    "node_selector": "crc"
   },
   {
     "namespace": "test-namespace-2",
@@ -169,7 +170,8 @@
     "pvc_capacity": "N/A",
     "secret_name": "test-secret-2",
     "secret_type": "Opaque",
-    "configmap_name": "test-configmap-2"
+    "configmap_name": "test-configmap-2",
+    "node_selector": "crc"
   },
   {
     "namespace": "test-namespace-3",
