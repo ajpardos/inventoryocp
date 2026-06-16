@@ -1,4 +1,4 @@
-/bash
+#/bin/bash
 # ============================================================================
 # Script: find_old_java_deployments.sh
 # Description: Connects to each running pod in OpenShift 4, detects the actual
